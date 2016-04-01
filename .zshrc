@@ -49,7 +49,7 @@ export UPDATE_ZSH_DAYS=13
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws brew common-aliases docker sbt tmux tmuxinator git python)
+plugins=(aws brew common-aliases docker scala sbt tmux tmuxinator git python)
 
 # User configuration
 
@@ -83,7 +83,7 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias brew_upgrade='brew update && brew upgrade && brew cleanup'
-alias inkling='cd ~/dev/inkling'
+alias ink='cd ~/dev/inkling'
 alias vi='vim'
 alias nv='nvim'
 alias dm='docker-machine'

@@ -27,4 +27,6 @@ fi
 # Symlink all necessary home directory files.
 ln -sfn "${BASE_DIR}/.zshrc" ~/.zshrc
 ln -sfn "${BASE_DIR}/.vimrc" ~/.config/nvim/init.vim
+ln -sfn "${BASE_DIR}/.vimrc" ~/.vimrc
+ln -sfn "${BASE_DIR}/.vimrc" ~/.ideavimrc
 
