@@ -1,6 +1,6 @@
 [core]
-	excludesfile = /Users/michaelhotan/.gitignore_global
-	editor = vim
+	excludesfile = /Users/mhotan/.gitignore_global
+	editor = nvim
 [difftool "sourcetree"]
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -9,7 +9,7 @@
 	trustExitCode = true
 [user]
 	name = Michael Hotan
-	email = michael.hotan@socrata.com
+	email = mhotan@inkling.com
 [gui]
 	recentrepo = /Users/michaelhotan/Developer/Socrata/core
 [diff]

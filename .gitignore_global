@@ -1,14 +1,4 @@
 *~
 .DS_Store
 .idea
-local-di2.conf
 *.iml
-.kitchen.yml
-out
-.chef/knife.rb
-.chef/michael_hotan.pem
-.chef/checksums
-.chef
-README.pdf
-bubble_ios/TwitterKit.framework
-Thorfile

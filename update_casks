@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Updates the ~/home-dir directory with the latest cask I install.
+
+command -v brew >/dev/null 2>&1 || { echo >&2 "I require brew but it's not installed.  Aborting."; exit 1; }
+
+echo "Updating cask list."
+brew cask list > ~/home-dir/etc/caskroom_casks
+brew leaves > ~/home-dir/etc/casks

@@ -7,6 +7,9 @@ echo "Installing Homebrew"
 
 echo "Installing Homebrew packages"
 brew install cask
+# brew cask list does not list packages by dependencies.  However many packages require java.
+# Therefore explicitly install java first.
+brew cask install java
 brew install $(cat "${BASE_DIR}/etc/casks")
 brew cask install $(cat "${BASE_DIR}/etc/caskroom_casks")
 
@@ -24,9 +27,23 @@ if [ ! -d ~/.config/base16-shell ]; then
   git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 fi
 
+echo "Fixing Ctrl+h issue for neovim"
+infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+tic $TERM.ti
+
 # Symlink all necessary home directory files.
+
+echo "Symlinking zshrc"
 ln -sfn "${BASE_DIR}/.zshrc" ~/.zshrc
+
+echo "Symlinking vimrc for neovim, vimrc, and ideavimrc"
 ln -sfn "${BASE_DIR}/.vimrc" ~/.config/nvim/init.vim
 ln -sfn "${BASE_DIR}/.vimrc" ~/.vimrc
 ln -sfn "${BASE_DIR}/.vimrc" ~/.ideavimrc
 
+echo "Symlinking tmux config"
+ln -sfn "${BASE_DIR}/.tmux.conf" ~/.tmux.conf
+
+echo "Symlinking gitconfig"
+ln -sfn "${BASE_DIR}/.gitconfig" ~/.gitconfig
+ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
