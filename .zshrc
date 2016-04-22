@@ -56,6 +56,16 @@ plugins=(aws brew common-aliases docker scala sbt tmux tmuxinator git python)
 export PATH="/Users/michaelhotan/.gvm/vertx/current/bin:/Users/michaelhotan/.gvm/springboot/current/bin:/Users/michaelhotan/.gvm/lazybones/current/bin:/Users/michaelhotan/.gvm/jbake/current/bin:/Users/michaelhotan/.gvm/groovyserv/current/bin:/Users/michaelhotan/.gvm/groovy/current/bin:/Users/michaelhotan/.gvm/griffon/current/bin:/Users/michaelhotan/.gvm/grails/current/bin:/Users/michaelhotan/.gvm/gradle/current/bin:/Users/michaelhotan/.gvm/glide/current/bin:/Users/michaelhotan/.gvm/gaiden/current/bin:/Users/michaelhotan/.gvm/crash/current/bin:/Users/michaelhotan/.gvm/asciidoctorj/current/bin:/Users/michaelhotan/.rbenv/shims:/Users/michaelhotan/.rbenv/shims:/Users/michaelhotan/.rbenv/bin:/Users/michaelhotan/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+### Helper functions
+
+# Determine a command/program exists.
+exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+CURRENT_COMPANY_RC_FILE="~/.inklingrc"
+[[ -s "${CURRENT_COMPANY_RC_FILE}" ]] && source "${CURRENT_COMPANY_RC_FILE}"
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -82,7 +92,9 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ggpush='git push mhotan $(git_current_branch)'
 alias brew_upgrade='brew update && brew upgrade && brew cleanup'
+alias dev='cd ~/dev/'
 alias ink='cd ~/dev/inkling'
 alias vi='vim'
 alias nv='nvim'
@@ -94,10 +106,15 @@ alias dmip='docker-machine ip $(docker-machine active)'
 alias git='hub'
 alias pr='git pull-request'
 
+# Source ~/.profile if exist.
+[[ -s ~/.profile ]] && source ~/.profile
+
 # Base16 Shell
 export BASE16_DEFAULT="base16-tomorrow.dark"
 BASE16_SHELL="$HOME/.config/base16-shell/${BASE16_DEFAULT}.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# Add Base16 Shell to the path
+export PATH="${PATH}:${HOME}/.config/base16-shell"
 
 # User RBenv configuration
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -106,6 +123,10 @@ eval "$(rbenv init -)"
 # Configure JEnv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+
+if exists virtualenvwrapper.sh; then
+  source `which virtualenvwrapper.sh`
+fi
 
 # Autocomplete for awscli
 # mandated by distribution of aws with Homebrew `brew install awscli`

@@ -31,7 +31,23 @@ echo "Fixing Ctrl+h issue for neovim"
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 tic $TERM.ti
 
-# Symlink all necessary home directory files.
+#############################################################################################
+##### Setting ZSH as the default shell
+
+BREW_INSTALLED_ZSH="/usr/local/bin/zsh"
+if grep -Fxq "${BREW_INSTALLED_ZSH}" /etc/shells
+then
+  echo "Found ${BREW_INSTALLED_ZSH}, doing nothing"
+else
+  echo "Did not find ${BREW_INSTALLED_ZSH} adding to shells"
+  sudo echo "${BREW_INSTALLED_ZSH}" >> /etc/shells
+fi
+
+echo "Attempting to set zsh as the default shell for this user."
+sudo chsh -s /usr/local/bin/zsh
+
+#############################################################################################
+##### Symlink all necessary home directory files.
 
 echo "Symlinking zshrc"
 ln -sfn "${BASE_DIR}/.zshrc" ~/.zshrc
@@ -47,3 +63,5 @@ ln -sfn "${BASE_DIR}/.tmux.conf" ~/.tmux.conf
 echo "Symlinking gitconfig"
 ln -sfn "${BASE_DIR}/.gitconfig" ~/.gitconfig
 ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
+
+
