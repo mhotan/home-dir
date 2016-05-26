@@ -23,8 +23,14 @@ mkdir -p ~/.config/nvim/backup ~/.config/nvim/swap ~/.config/nvim/undo
 
 # Install base16-shell
 if [ ! -d ~/.config/base16-shell ]; then
-  echo "Install base16-shell"
+  echo "Downloading base16-shell"
   git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+fi
+
+# Install base16-shell
+if [ ! -d ~/.config/base16-idea ]; then
+  echo "Downloading base16-idea"
+  git clone https://github.com/adilosa/base16-idea.git ~/.config/base16-idea
 fi
 
 echo "Fixing Ctrl+h issue for neovim"
