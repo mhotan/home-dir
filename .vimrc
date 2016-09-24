@@ -235,8 +235,7 @@ let g:unite_source_history_yank_enable = 1
 
 
 """""""
-""" let
-
+""" base 16 color space set tot 256
 let base16colorspace=256
 
 

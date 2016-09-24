@@ -49,7 +49,7 @@ export UPDATE_ZSH_DAYS=13
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws brew common-aliases docker scala sbt tmux tmuxinator git python)
+plugins=(aws brew common-aliases docker docker-compose scala sbt tmux tmuxinator git python)
 
 # User configuration
 
@@ -63,8 +63,23 @@ exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+if [ -s ~/.profile ]; then
+  source ~/.profile
+else
+  echo "WARNING: Unable to find to find .profile file"
+fi
+
+
 CURRENT_COMPANY_RC_FILE="~/.inklingrc"
 [[ -s "${CURRENT_COMPANY_RC_FILE}" ]] && source "${CURRENT_COMPANY_RC_FILE}"
+
+if [ -n "$DIGITAL_OCEAN_ACCESS_TOKEN" ]; then
+  dm_create_digitalocean() {
+    docker-machine create --driver digitalocean --digitalocean-access-token "${DIGITAL_OCEAN_ACCESS_TOKEN}" "$1"
+  }
+else
+  echo "WARNING: No Digital Ocean access token found."
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,9 +88,9 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='nvim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -123,6 +138,9 @@ eval "$(rbenv init -)"
 # Configure JEnv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+
+# Rust and Rustup configuration
+[[ -s ${HOME}/.cargo/env ]] && source ${HOME}/.cargo/env
 
 if exists virtualenvwrapper.sh; then
   source `which virtualenvwrapper.sh`
