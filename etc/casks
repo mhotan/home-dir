@@ -28,6 +28,7 @@ jq
 leiningen
 libtermkey
 neovim/neovim/neovim
+node
 perl
 phantomjs
 postgresql

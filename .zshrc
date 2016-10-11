@@ -49,7 +49,7 @@ export UPDATE_ZSH_DAYS=13
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws brew common-aliases docker docker-compose scala sbt tmux tmuxinator git python)
+plugins=(aws brew common-aliases docker docker-compose git python tmux)
 
 # User configuration
 
