@@ -26,9 +26,10 @@ imagemagick
 jenv
 jq
 leiningen
-libtermkey
+libssh2
 neovim/neovim/neovim
 node
+nvm
 perl
 phantomjs
 postgresql
@@ -38,9 +39,9 @@ python3
 rbenv
 redis
 ruby
-rust
 sbt
 scala
+slimerjs
 subversion
 swagger-codegen
 the_silver_searcher
@@ -48,6 +49,8 @@ tldr-pages/tldr/tldr
 tmux
 tree
 typesafe-activator
+utf8proc
 vim
+watch
 wget
 zsh

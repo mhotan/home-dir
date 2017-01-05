@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh installation.
+
 export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -107,12 +108,15 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Custom git push alias 
+
 alias ggpush='git push mhotan $(git_current_branch)'
 alias brew_upgrade='brew update && brew upgrade && brew cleanup'
 alias dev='cd ~/dev/'
 alias ink='cd ~/dev/inkling'
 alias vi='vim'
-alias nv='nvim'
+
 alias dm='docker-machine'
 alias dc='docker-compose'
 alias d='docker'
@@ -132,12 +136,16 @@ BASE16_SHELL="$HOME/.config/base16-shell/${BASE16_DEFAULT}.sh"
 export PATH="${PATH}:${HOME}/.config/base16-shell"
 
 # User RBenv configuration
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
 # Configure JEnv
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+#export PATH="$HOME/.jenv/bin:$PATH"
+#eval "$(jenv init -)"
+
+# NVM / Node environment manager
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 # Rust and Rustup configuration
 [[ -s ${HOME}/.cargo/env ]] && source ${HOME}/.cargo/env
@@ -155,3 +163,4 @@ source /usr/local/share/zsh/site-functions/_aws
 export PATH="/usr/local/sbin:$PATH"
 
 HELPDIR=/usr/local/share/zsh/help
+
