@@ -131,15 +131,12 @@ alias pr='git pull-request'
 # Base16 Shell
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-#export BASE16_DEFAULT="base16-tomorrow.dark"
-#BASE16_SHELL="$HOME/.config/base16-shell/scripts/${BASE16_DEFAULT}.sh"
-#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-# Add Base16 Shell to the path
-# export PATH="${PATH}:${HOME}/.config/base16-shell/scripts"
+# Set the default base16 background color
+base16_tomorrow-night
 
 # User RBenv configuration
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # Configure JEnv
 #export PATH="$HOME/.jenv/bin:$PATH"
