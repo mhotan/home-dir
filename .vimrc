@@ -16,27 +16,22 @@
 " SlimeConfig may get confused with C-6
 " leader combo for delete current buffer and swap to previous
 
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
 
-  " Required:
-  set runtimepath+=/Users/mhotan/.vim/bundle/neobundle.vim/
+if &compatible
+ set nocompatible               " Be iMproved
 endif
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle'))
+set runtimepath+=~/.vim/bundle/neobundle.vim/
 
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
 
 " C/C++
 NeoBundle 'justmao945/vim-clang'
@@ -236,8 +231,10 @@ let g:unite_source_history_yank_enable = 1
 
 """""""
 """ base 16 color space set tot 256
-let base16colorspace=256
-
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 " spacemacs!
 let mapleader=" "

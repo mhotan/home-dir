@@ -54,7 +54,7 @@ plugins=(aws brew common-aliases docker docker-compose git python tmux)
 
 # User configuration
 
-export PATH="/Users/michaelhotan/.gvm/vertx/current/bin:/Users/michaelhotan/.gvm/springboot/current/bin:/Users/michaelhotan/.gvm/lazybones/current/bin:/Users/michaelhotan/.gvm/jbake/current/bin:/Users/michaelhotan/.gvm/groovyserv/current/bin:/Users/michaelhotan/.gvm/groovy/current/bin:/Users/michaelhotan/.gvm/griffon/current/bin:/Users/michaelhotan/.gvm/grails/current/bin:/Users/michaelhotan/.gvm/gradle/current/bin:/Users/michaelhotan/.gvm/glide/current/bin:/Users/michaelhotan/.gvm/gaiden/current/bin:/Users/michaelhotan/.gvm/crash/current/bin:/Users/michaelhotan/.gvm/asciidoctorj/current/bin:/Users/michaelhotan/.rbenv/shims:/Users/michaelhotan/.rbenv/shims:/Users/michaelhotan/.rbenv/bin:/Users/michaelhotan/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.rbenv/shims:/Users/${USER}/.rbenv/shims:/Users/${USER}/.rbenv/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 ### Helper functions
@@ -129,11 +129,13 @@ alias pr='git pull-request'
 [[ -s ~/.profile ]] && source ~/.profile
 
 # Base16 Shell
-export BASE16_DEFAULT="base16-tomorrow.dark"
-BASE16_SHELL="$HOME/.config/base16-shell/${BASE16_DEFAULT}.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+#export BASE16_DEFAULT="base16-tomorrow.dark"
+#BASE16_SHELL="$HOME/.config/base16-shell/scripts/${BASE16_DEFAULT}.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 # Add Base16 Shell to the path
-export PATH="${PATH}:${HOME}/.config/base16-shell"
+# export PATH="${PATH}:${HOME}/.config/base16-shell/scripts"
 
 # User RBenv configuration
 #export PATH="$HOME/.rbenv/bin:$PATH"
@@ -159,7 +161,7 @@ fi
 source /usr/local/share/zsh/site-functions/_aws
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/michaelhotan/.gvm/bin/gvm-init.sh" ]] && source "/Users/michaelhotan/.gvm/bin/gvm-init.sh"
+[[ -s "/Users/${USER}/.gvm/bin/gvm-init.sh" ]] && source "/Users/${USER}/.gvm/bin/gvm-init.sh"
 export PATH="/usr/local/sbin:$PATH"
 
 HELPDIR=/usr/local/share/zsh/help
