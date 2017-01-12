@@ -37,6 +37,11 @@ echo "Fixing Ctrl+h issue for neovim"
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 tic $TERM.ti
 
+echo "Creating VIM related directories"
+mkdir -p ~/.vim/backup
+mkdir -p ~/.vim/swap
+mkdir -p ~/.vim/undo
+
 #############################################################################################
 ##### Setting ZSH as the default shell
 
@@ -70,4 +75,11 @@ echo "Symlinking gitconfig"
 ln -sfn "${BASE_DIR}/.gitconfig" ~/.gitconfig
 ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
 
+#############################################################################################
+##### Installing Ruby and Python dependencies.
 
+# Install rsense for Ruby development helper
+gem install rsense
+
+# Install Atom sync settings
+apm install sync-settings
