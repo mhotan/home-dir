@@ -1,6 +1,6 @@
 [core]
 	excludesfile = /Users/mhotan/.gitignore_global
-	editor = nvim
+	editor = vim
 [difftool "sourcetree"]
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -22,8 +22,6 @@
 	trustExitCode = true
 [push]
 	default = matching
-[commit]
-	template = /Users/mhotan/.stCommitMsg
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
