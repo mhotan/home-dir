@@ -132,7 +132,7 @@ alias pr='git pull-request'
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 # Set the default base16 background color
-base16_tomorrow-night
+base16_materia
 
 # User RBenv configuration
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -147,7 +147,7 @@ export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
 
 # Rust and Rustup configuration
-[[ -s ${HOME}/.cargo/env ]] && source ${HOME}/.cargo/env
+#[[ -s ${HOME}/.cargo/env ]] && source ${HOME}/.cargo/env
 
 if exists virtualenvwrapper.sh; then
   source `which virtualenvwrapper.sh`
@@ -158,8 +158,8 @@ fi
 source /usr/local/share/zsh/site-functions/_aws
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/${USER}/.gvm/bin/gvm-init.sh" ]] && source "/Users/${USER}/.gvm/bin/gvm-init.sh"
-export PATH="/usr/local/sbin:$PATH"
+#[[ -s "/Users/${USER}/.gvm/bin/gvm-init.sh" ]] && source "/Users/${USER}/.gvm/bin/gvm-init.sh"
+#export PATH="/usr/local/sbin:$PATH"
 
 HELPDIR=/usr/local/share/zsh/help
 
