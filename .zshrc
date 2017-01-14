@@ -112,7 +112,7 @@ export SSH_KEY_PATH="~/.ssh/dsa_id"
 # Custom git push alias 
 
 alias ggpush='git push mhotan $(git_current_branch)'
-alias brew_upgrade='brew update && brew upgrade && brew cleanup'
+alias brew_upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
 alias dev='cd ~/dev/'
 alias ink='cd ~/dev/inkling'
 alias vi='vim'
