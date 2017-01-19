@@ -89,16 +89,16 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
+  export EDITOR='vim'
 else
-  export EDITOR='nvim'
+  export EDITOR='vim'
 fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -132,22 +132,19 @@ alias pr='git pull-request'
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 # Set the default base16 background color
-base16_materia
+base16_tomorrow-night
 
 # User RBenv configuration
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # Configure JEnv
-#export PATH="$HOME/.jenv/bin:$PATH"
-#eval "$(jenv init -)"
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
 
 # NVM / Node environment manager
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
-
-# Rust and Rustup configuration
-#[[ -s ${HOME}/.cargo/env ]] && source ${HOME}/.cargo/env
 
 if exists virtualenvwrapper.sh; then
   source `which virtualenvwrapper.sh`
@@ -156,10 +153,6 @@ fi
 # Autocomplete for awscli
 # mandated by distribution of aws with Homebrew `brew install awscli`
 source /usr/local/share/zsh/site-functions/_aws
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-#[[ -s "/Users/${USER}/.gvm/bin/gvm-init.sh" ]] && source "/Users/${USER}/.gvm/bin/gvm-init.sh"
-#export PATH="/usr/local/sbin:$PATH"
 
 HELPDIR=/usr/local/share/zsh/help
 
