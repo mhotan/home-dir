@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/mhotan/.gitignore_global
+	excludesfile = /Users/michaelhotan/home-dir/.gitignore_global
 	editor = vim
 [difftool "sourcetree"]
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
@@ -9,7 +9,7 @@
 	trustExitCode = true
 [user]
 	name = Michael Hotan
-	email = mhotan@inkling.com
+	email = michael.hotan@gmail.com
 [gui]
 [diff]
 	tool = Kaleidoscope
@@ -29,3 +29,5 @@
 	process = git-lfs filter-process
 [gui]
 	recentrepo = /Users/mhotan/dev/inkling/inkling-mediaservice
+[commit]
+	template = /Users/michaelhotan/.stCommitMsg

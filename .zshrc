@@ -54,7 +54,7 @@ plugins=(aws brew common-aliases docker docker-compose git python tmux)
 
 # User configuration
 
-export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.rbenv/shims:/Users/${USER}/.rbenv/shims:/Users/${USER}/.rbenv/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 ### Helper functions
@@ -71,16 +71,16 @@ else
 fi
 
 
-CURRENT_COMPANY_RC_FILE="~/.inklingrc"
+CURRENT_COMPANY_RC_FILE="~/.flexerc"
 [[ -s "${CURRENT_COMPANY_RC_FILE}" ]] && source "${CURRENT_COMPANY_RC_FILE}"
 
-if [ -n "$DIGITAL_OCEAN_ACCESS_TOKEN" ]; then
-  dm_create_digitalocean() {
-    docker-machine create --driver digitalocean --digitalocean-access-token "${DIGITAL_OCEAN_ACCESS_TOKEN}" "$1"
-  }
-else
-  echo "WARNING: No Digital Ocean access token found."
-fi
+#if [ -n "$DIGITAL_OCEAN_ACCESS_TOKEN" ]; then
+#  dm_create_digitalocean() {
+#    docker-machine create --driver digitalocean --digitalocean-access-token "${DIGITAL_OCEAN_ACCESS_TOKEN}" "$1"
+#  }
+#else
+#  echo "WARNING: No Digital Ocean access token found."
+#fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,19 +111,23 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Custom git push alias 
 
-alias ggpush='git push mhotan $(git_current_branch)'
 alias brew_upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
 alias dev='cd ~/dev/'
-alias ink='cd ~/dev/inkling'
+alias flexe='cd ~/dev/flexe'
+alias warehouser='cd ~/dev/flexe/repos/warehouser'
 alias vi='vim'
 
+alias be='bundle exec'
 alias dm='docker-machine'
 alias dc='docker-compose'
+alias dcr='docker-compose run'
 alias d='docker'
-alias deink='eval $(docker-machine env inkling)'
+alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
+alias dmflexe='eval $(dm env flexe)'
 alias dmip='docker-machine ip $(docker-machine active)'
 alias git='hub'
 alias pr='git pull-request'
+alias ggpush='git push mhotan $(git_current_branch)'
 
 # Source ~/.profile if exist.
 [[ -s ~/.profile ]] && source ~/.profile
@@ -135,20 +139,20 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 base16_tomorrow-night
 
 # User RBenv configuration
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
 # Configure JEnv
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+#export PATH="$HOME/.jenv/bin:$PATH"
+#eval "$(jenv init -)"
 
 # NVM / Node environment manager
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
 
-if exists virtualenvwrapper.sh; then
-  source `which virtualenvwrapper.sh`
-fi
+#if exists virtualenvwrapper.sh; then
+#  source `which virtualenvwrapper.sh`
+#fi
 
 # Autocomplete for awscli
 # mandated by distribution of aws with Homebrew `brew install awscli`
@@ -156,3 +160,6 @@ source /usr/local/share/zsh/site-functions/_aws
 
 HELPDIR=/usr/local/share/zsh/help
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
