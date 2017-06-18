@@ -127,7 +127,7 @@ alias dmflexe='eval $(dm env flexe)'
 alias dmip='docker-machine ip $(docker-machine active)'
 alias git='hub'
 alias pr='git pull-request'
-alias ggpush='git push mhotan $(git_current_branch)'
+alias ggpull='git pull origin $(git_current_branch)'
 
 # Source ~/.profile if exist.
 [[ -s ~/.profile ]] && source ~/.profile
