@@ -31,3 +31,5 @@
 	recentrepo = /Users/mhotan/dev/inkling/inkling-mediaservice
 [commit]
 	template = /Users/michaelhotan/.stCommitMsg
+[interactive]
+  singlekey = true

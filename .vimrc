@@ -49,10 +49,6 @@ NeoBundle 'chrisbra/csv.vim'
 NeoBundle 'elzr/vim-json'
 NeoBundle 'GEverding/vim-hocon'
 
-" Elixir NOTE: Currently Unused
-NeoBundle 'elixir-lang/vim-elixir'
-NeoBundle 'jimenezrick/vimerl'
-
 " Git
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'tpope/vim-fugitive'
@@ -126,6 +122,9 @@ NeoBundle 'tpope/vim-unimpaired'
 " VIM Yaml
 NeoBundle 'avakhov/vim-yaml'
 
+" VIM Fuzzy finder
+NeoBundle 'kien/ctrlp.vim'
+
 " Required:
 call neobundle#end()
 
@@ -146,6 +145,10 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Control P Fuzzy Finder mappings
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')

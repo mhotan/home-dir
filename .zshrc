@@ -128,6 +128,7 @@ alias dmip='docker-machine ip $(docker-machine active)'
 alias git='hub'
 alias pr='git pull-request'
 alias ggpull='git pull origin $(git_current_branch)'
+alias tidyxml='tidy -xml -i'
 
 # Source ~/.profile if exist.
 [[ -s ~/.profile ]] && source ~/.profile
@@ -163,3 +164,4 @@ HELPDIR=/usr/local/share/zsh/help
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
