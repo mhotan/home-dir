@@ -2,3 +2,5 @@
 .DS_Store
 .idea
 *.iml
+docker-ssh/id_rsa
+docker-ssh/id_rsa.pub

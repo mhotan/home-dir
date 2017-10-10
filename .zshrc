@@ -113,7 +113,7 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 alias brew_upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
 alias dev='cd ~/dev/'
-alias flexe='cd ~/dev/flexe'
+alias flexe='cd ~/dev/flexe/repos'
 alias warehouser='cd ~/dev/flexe/repos/warehouser'
 alias vi='vim'
 
@@ -129,6 +129,7 @@ alias git='hub'
 alias pr='git pull-request'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
+alias gbda="git branch | grep -v "master" | xargs git branch -D"
 
 # Source ~/.profile if exist.
 [[ -s ~/.profile ]] && source ~/.profile
@@ -165,3 +166,5 @@ HELPDIR=/usr/local/share/zsh/help
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/icu4c/bin:$PATH"
