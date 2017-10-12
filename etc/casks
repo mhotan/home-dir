@@ -1,5 +1,6 @@
 apple-gcc42
 awscli
+bower
 cask
 coreutils
 dash
@@ -16,8 +17,10 @@ git
 git-flow
 git-lfs
 giter8
+gnumeric
 gradle
 graphviz
+htop
 httpie
 hub
 imagemagick
@@ -28,7 +31,6 @@ kubernetes-cli
 leiningen
 libksba
 libmagic
-node
 ntp
 nvm
 perl
@@ -40,6 +42,7 @@ rbenv
 ruby
 sbt
 scala
+sdedit
 swagger-codegen
 terraform
 the_silver_searcher
