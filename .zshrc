@@ -138,7 +138,7 @@ alias gbda="git branch | grep -v "master" | xargs git branch -D"
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 # Set the default base16 background color
-base16_tomorrow-night
+base16_material-darker
 
 # User RBenv configuration
 #export PATH="$HOME/.rbenv/bin:$PATH"
@@ -168,3 +168,15 @@ eval "$(jenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+
+# Set nvm environment variable.
+export NVM_DIR="$HOME/.nvm"
+# Assume brew install nvm already done
+. "/usr/local/opt/nvm/nvm.sh"

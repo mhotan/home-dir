@@ -42,6 +42,9 @@ mkdir -p ~/.vim/backup
 mkdir -p ~/.vim/swap
 mkdir -p ~/.vim/undo
 
+echo "Creating nvm config directory"
+mkdir -p ~/.nvm
+
 #############################################################################################
 ##### Setting ZSH as the default shell
 

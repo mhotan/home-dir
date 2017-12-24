@@ -1,4 +1,5 @@
 apple-gcc42
+automake
 awscli
 bower
 cask
@@ -6,7 +7,6 @@ coreutils
 dash
 dnsmasq
 docker-compose
-emacs
 fabric
 fakeroot
 flyway
@@ -18,7 +18,6 @@ git-flow
 git-lfs
 giter8
 gnumeric
-gradle
 graphviz
 htop
 httpie
@@ -27,19 +26,16 @@ imagemagick
 imagemagick@6
 jenv
 jq
-kubernetes-cli
+kompose
 leiningen
 libksba
 libmagic
+maven
 ntp
 nvm
-perl
 postgresql
-python
-python3
 qemu
 rbenv
-ruby
 sbt
 scala
 sdedit
@@ -53,6 +49,7 @@ tree
 typesafe-activator
 v8@3.15
 vim
+watch
 wget
 yarn
 zlib

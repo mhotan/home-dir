@@ -449,5 +449,4 @@ au Syntax * RainbowParenthesesLoadBraces
 
 """""""""""""""
 """ colorscheme
-set background=dark
-colorscheme base16-tomorrow
+" set background=dark
