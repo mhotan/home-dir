@@ -50,7 +50,7 @@ export UPDATE_ZSH_DAYS=13
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws brew common-aliases docker docker-compose git python tmux)
+plugins=(brew terraform common-aliases docker docker-compose git)
 
 # User configuration
 
@@ -115,7 +115,8 @@ alias brew_upgrade='brew update && brew upgrade && brew cleanup && brew cask cle
 alias dev='cd ~/dev/'
 alias flexe='cd ~/dev/flexe/repos'
 alias warehouser='cd ~/dev/flexe/repos/warehouser'
-alias vi='vim'
+alias vi='nvim'
+alias nv='nvim'
 
 alias be='bundle exec'
 alias dm='docker-machine'

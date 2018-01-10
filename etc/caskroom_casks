@@ -1,7 +1,6 @@
 adobe-reader
 alfred
 android-file-transfer
-atom
 diffmerge
 docker
 evernote
@@ -20,6 +19,7 @@ kitematic
 lastpass
 microsoft-office
 paintbrush
+postman
 quicktime-player7
 rubymine
 slack
@@ -30,5 +30,6 @@ tableau-public
 unetbootin
 vagrant
 virtualbox
+visual-studio-code
 visualvm
 whatsapp

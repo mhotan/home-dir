@@ -19,7 +19,6 @@ git-lfs
 giter8
 gnumeric
 graphviz
-htop
 httpie
 hub
 imagemagick
@@ -31,6 +30,7 @@ leiningen
 libksba
 libmagic
 maven
+neovim
 ntp
 nvm
 postgresql
