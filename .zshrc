@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh installation.
+# 
 
 export ZSH=~/.oh-my-zsh
 
@@ -113,8 +114,7 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 alias brew_upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
 alias dev='cd ~/dev/'
-alias flexe='cd ~/dev/flexe/repos'
-alias warehouser='cd ~/dev/flexe/repos/warehouser'
+
 alias vi='nvim'
 alias nv='nvim'
 
@@ -124,13 +124,14 @@ alias dc='docker-compose'
 alias dcr='docker-compose run'
 alias d='docker'
 alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
-alias dmflexe='eval $(dm env flexe)'
 alias dmip='docker-machine ip $(docker-machine active)'
 alias git='hub'
 alias pr='git pull-request'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
 alias gbda="git branch | grep -v "master" | xargs git branch -D"
+alias gpme='git push mhotan $(git_current_branch)'
+alias gcloud-configure-docker='gcloud auth configure-docker'
 
 # Source ~/.profile if exist.
 [[ -s ~/.profile ]] && source ~/.profile
@@ -181,3 +182,11 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 # Assume brew install nvm already done
 . "/usr/local/opt/nvm/nvm.sh"
+
+export PATH=${GOPATH}/bin:$PATH
+
+# kubernetes support
+# Requires kubectl
+source <(kubectl completion zsh)
+
+source ~/.flexe_zshrc
