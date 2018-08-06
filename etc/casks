@@ -1,11 +1,11 @@
 apple-gcc42
 automake
-awscli
 bower
+brew-cask-completion
 cask
+cmake
 coreutils
 dash
-dnsmasq
 docker-compose
 fabric
 fakeroot
@@ -18,7 +18,10 @@ git-flow
 git-lfs
 giter8
 gnumeric
+go
+gobject-introspection
 graphviz
+htop
 httpie
 hub
 imagemagick
@@ -29,11 +32,14 @@ kompose
 leiningen
 libksba
 libmagic
+lua@5.1
 maven
 neovim
 ntp
 nvm
+openssl@1.1
 postgresql
+pyenv-virtualenvwrapper
 qemu
 rbenv
 sbt
@@ -49,6 +55,7 @@ tree
 typesafe-activator
 v8@3.15
 vim
+vte
 watch
 wget
 yarn

@@ -51,7 +51,7 @@ export UPDATE_ZSH_DAYS=13
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(brew terraform common-aliases docker docker-compose git)
+plugins=(brew terraform common-aliases docker docker-compose git kubectl)
 
 # User configuration
 
@@ -158,10 +158,6 @@ export NVM_DIR="$HOME/.nvm"
 #  source `which virtualenvwrapper.sh`
 #fi
 
-# Autocomplete for awscli
-# mandated by distribution of aws with Homebrew `brew install awscli`
-source /usr/local/share/zsh/site-functions/_aws
-
 HELPDIR=/usr/local/share/zsh/help
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -184,9 +180,5 @@ export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
 export PATH=${GOPATH}/bin:$PATH
-
-# kubernetes support
-# Requires kubectl
-source <(kubectl completion zsh)
 
 source ~/.flexe_zshrc
