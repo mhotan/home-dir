@@ -6,7 +6,10 @@ cask
 cmake
 coreutils
 dash
+docker
 docker-compose
+docker-machine
+enca
 fabric
 fakeroot
 flyway
