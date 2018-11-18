@@ -160,7 +160,6 @@ export NVM_DIR="$HOME/.nvm"
 
 HELPDIR=/usr/local/share/zsh/help
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
@@ -182,3 +181,8 @@ export NVM_DIR="$HOME/.nvm"
 export PATH=${GOPATH}/bin:$PATH
 
 source ~/.flexe_zshrc
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
