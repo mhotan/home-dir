@@ -112,7 +112,7 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Custom git push alias 
 
-alias brew_upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
+alias brew_upgrade='brew update && brew upgrade && brew cleanup'
 alias dev='cd ~/dev/'
 
 alias vi='nvim'
