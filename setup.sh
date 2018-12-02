@@ -9,9 +9,9 @@ echo "Installing Homebrew packages"
 brew install cask
 # brew cask list does not list packages by dependencies.  However many packages require java.
 # Therefore explicitly install java first.
-brew cask install java
-brew install $(cat "${BASE_DIR}/etc/casks")
+brew cask install homebrew/cask-versions/java8
 brew cask install $(cat "${BASE_DIR}/etc/caskroom_casks")
+brew install $(cat "${BASE_DIR}/etc/casks")
 
 # Reference: https://github.com/robbyrussell/oh-my-zsh
 echo "Installing Oh My ZSH"
@@ -82,7 +82,7 @@ ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
 ##### Installing Ruby and Python dependencies.
 
 # Install rsense for Ruby development helper
-gem install rsense
+# gem install rsense
 
 # Install Atom sync settings
 apm install sync-settings
