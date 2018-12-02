@@ -1,0 +1,23 @@
+function kubectl-reload() {
+  kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"date\":\"`date +'%s'`\"}}}}}"
+}
+
+alias flexe='cd ~/dev/flexe/repos'
+alias warehouser='cd ~/dev/flexe/repos/warehouser'
+
+# Reset warehouser db and seed with oms data
+alias wh-reset-oms='RAILS_ENV=development bundle exec rake db:drop db:create db:schema:load && RAILS_ENV=development bundle exec rake db:seed:oms'
+alias om-reset-oms='RAILS_ENV=development bundle exec rake db:drop db:create db:migrate && RAILS_ENV=development bundle exec rake db:seed:oms'
+
+alias dm-create-flexe-dev='docker-machine create -d virtualbox --virtualbox-disk-size 40000 --virtualbox-memory 4096 flexe-dev'
+alias eval-flexe-dev='eval $(dm env flexe-dev)'
+
+alias k8s-dev-oms='gcloud config set project flexe-dev && gcloud container clusters get-credentials applications-primary-dev-oms --zone=us-west1-a'
+alias k8s-dev-wse='gcloud config set project flexe-dev && gcloud container clusters get-credentials applications-primary-dev-wse --zone=us-west1-a'
+alias k8s-dev-sa='gcloud config set project flexe-dev && gcloud container clusters get-credentials applications-primary-dev-sa --zone=us-west1-a'
+alias k8s-dev-ci='gcloud config set project flexe-dev && gcloud container clusters get-credentials applications-primary-dev-ci --zone=us-west1-a'
+alias k8s-dev-ak='gcloud config set project flexe-dev && gcloud container clusters get-credentials applications-primary-dev-ak --zone=us-west1-a'
+alias k8s-staging='gcloud config set project flexe-staging && gcloud container clusters get-credentials applications-primary --zone=us-west1-a'
+alias k8s-sandbox='gcloud config set project flexe-stable && gcloud container clusters get-credentials applications-primary-sandbox --zone=us-central1-a'
+alias k8s-production='gcloud config set project flexe-production && gcloud container clusters get-credentials applications-primary --zone=us-central1-a'
+alias k8s-infra='gcloud config set project flexe-main && gcloud container clusters get-credentials infrastructure'
