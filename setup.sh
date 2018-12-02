@@ -78,6 +78,9 @@ echo "Symlinking gitconfig"
 ln -sfn "${BASE_DIR}/.gitconfig" ~/.gitconfig
 ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
 
+echo "Symlinking company specific rc file"
+ln -sfn "${BASE_DIR}/.flexe_zshrc" ~/.flexe_zshrc
+
 #############################################################################################
 ##### Installing Ruby and Python dependencies.
 
