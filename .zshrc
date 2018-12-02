@@ -142,13 +142,8 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 # Set the default base16 background color
 base16_material-darker
 
-# User RBenv configuration
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
-
 # Configure JEnv
-#export PATH="$HOME/.jenv/bin:$PATH"
-#eval "$(jenv init -)"
+eval "$(jenv init -)"
 
 # NVM / Node environment manager
 export NVM_DIR="$HOME/.nvm"
@@ -165,12 +160,6 @@ eval "$(jenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
 # Set nvm environment variable.
@@ -182,7 +171,15 @@ export PATH=${GOPATH}/bin:$PATH
 
 source ~/.flexe_zshrc
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# User RBenv configuration
+eval "$(rbenv init -)"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc'; fi
+
+# The next is to override imagemagick with imagemagick6
+# required for some versions of rmagick
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
