@@ -33,6 +33,10 @@ if [ ! -d ~/.config/base16-idea ]; then
   git clone https://github.com/adilosa/base16-idea.git ~/.config/base16-idea
 fi
 
+echo "Installing python3 support for neovim"
+pip3 install --user neovim
+pip3  install sexpdata websocket-client
+
 echo "Fixing Ctrl+h issue for neovim"
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 tic $TERM.ti
