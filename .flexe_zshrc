@@ -2,6 +2,20 @@ function kubectl-reload() {
   kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
 
+# Log in to running pod
+function k8s-ssh-bash() {
+    POD_NAME=`kubectl get pods | sed -n "/^$1.*Running/p" | awk '{print $1}' | sed -n 1p`
+    echo "Logging into pod ${POD_NAME}"
+    kubectl exec -it ${POD_NAME} -- /bin/bash
+}
+
+# Log in to running pod
+function k8s-ssh-bash-l() {
+    POD_NAME=`kubectl get pods | sed -n "/^$1.*Running/p" | awk '{print $1}' | sed -n 1p`
+    echo "Logging into pod ${POD_NAME}"
+    kubectl exec -it ${POD_NAME} -- /bin/bash -l
+}
+
 alias flexe='cd ~/dev/flexe/repos'
 alias warehouser='cd ~/dev/flexe/repos/warehouser'
 
@@ -20,4 +34,5 @@ alias k8s-dev-ak='gcloud config set project flexe-dev && gcloud container cluste
 alias k8s-staging='gcloud config set project flexe-staging && gcloud container clusters get-credentials applications-primary --zone=us-west1-a'
 alias k8s-sandbox='gcloud config set project flexe-stable && gcloud container clusters get-credentials applications-primary-sandbox --zone=us-central1-a'
 alias k8s-production='gcloud config set project flexe-production && gcloud container clusters get-credentials applications-primary --zone=us-central1-a'
-alias k8s-infra='gcloud config set project flexe-main && gcloud container clusters get-credentials infrastructure'
+alias k8s-infra='gcloud config set project flexe-main && gcloud container clusters get-credentials infrastructure --zone=us-west1-a'
+alias k8s-michael-sandbox='gcloud config set project flexe-dev && gcloud container clusters get-credentials michael-sandbox --zone=us-west1-a'
