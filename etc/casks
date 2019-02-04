@@ -44,7 +44,7 @@ nvm
 openssl@1.1
 postgresql
 qemu
-rbenv
+ruby-build
 sbt
 scala
 sdedit

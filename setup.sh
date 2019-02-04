@@ -91,5 +91,5 @@ ln -sfn "${BASE_DIR}/.flexe_zshrc" ~/.flexe_zshrc
 # Install rsense for Ruby development helper
 # gem install rsense
 
-# Install Atom sync settings
-apm install sync-settings
+# Install VSCode settings
+code --install-extension Shan.code-settings-sync
