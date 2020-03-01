@@ -6,16 +6,14 @@ echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo "Installing Homebrew packages"
-brew install cask
-# brew cask list does not list packages by dependencies.  However many packages require java.
-# Therefore explicitly install java first.
-brew cask install homebrew/cask-versions/java8
-brew cask install $(cat "${BASE_DIR}/etc/caskroom_casks")
-brew install $(cat "${BASE_DIR}/etc/casks")
+brew bundle --file=${BASE_DIR}/brew/Brewfile
 
 # Reference: https://github.com/robbyrussell/oh-my-zsh
 echo "Installing Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+echo "Installing tools for managing Python environments"
+pip install virtualenvwrapper
 
 echo "Creating ~/.config directories"
 # Implictly creates .config
@@ -35,7 +33,7 @@ fi
 
 echo "Installing python3 support for neovim"
 pip3 install --user neovim
-pip3  install sexpdata websocket-client
+pip3 install sexpdata websocket-client
 
 echo "Fixing Ctrl+h issue for neovim"
 infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
@@ -93,3 +91,4 @@ ln -sfn "${BASE_DIR}/.flexe_zshrc" ~/.flexe_zshrc
 
 # Install VSCode settings
 code --install-extension Shan.code-settings-sync
+

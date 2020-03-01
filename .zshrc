@@ -7,7 +7,11 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="wezm"
+#ZSH_THEME="wezm"
+
+# Requires brew tap homebrew/cask-fonts && brew cask install font-hack-nerd-font
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_MODE="nerdfont-complete"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -92,7 +96,7 @@ export LANG=en_US.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='nvim'
+  export EDITOR='vim'
 fi
 
 # Compilation flags
@@ -115,8 +119,7 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 alias brew_upgrade='brew update && brew upgrade && brew cleanup'
 alias dev='cd ~/dev/'
 
-alias vi='nvim'
-alias nv='nvim'
+alias vi='vim'
 
 alias be='bundle exec'
 alias dm='docker-machine'
@@ -133,6 +136,9 @@ alias gbda="git branch | grep -v "master" | xargs git branch -D"
 alias gpme='git push mhotan $(git_current_branch)'
 alias gcloud-configure-docker='gcloud auth configure-docker'
 
+# TODO Figure out to escape following commadn to clean up old local branches
+# git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
+
 # Source ~/.profile if exist.
 [[ -s ~/.profile ]] && source ~/.profile
 
@@ -144,6 +150,7 @@ base16_material-darker
 
 # Configure JEnv
 eval "$(jenv init -)"
+launchctl setenv JAVA_HOME "$(jenv javahome)"
 
 # NVM / Node environment manager
 export NVM_DIR="$HOME/.nvm"
@@ -156,24 +163,16 @@ export NVM_DIR="$HOME/.nvm"
 HELPDIR=/usr/local/share/zsh/help
 
 export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
-
-# Set nvm environment variable.
-export NVM_DIR="$HOME/.nvm"
-# Assume brew install nvm already done
-. "/usr/local/opt/nvm/nvm.sh"
-
 export PATH=${GOPATH}/bin:$PATH
 
 source ~/.flexe_zshrc
 
 # User RBenv configuration
-# Current employer uses rvm. 
-# eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc'; fi
@@ -185,5 +184,8 @@ if [ -f '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Us
 # required for some versions of rmagick
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+if [ /Users/michaelhotan/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+# Setup Python virtual environments
+[ -d ~/dev/python/envs ] || mkdir ~/dev/python/envs
+export WORKON_HOME=~/dev/python/envs
