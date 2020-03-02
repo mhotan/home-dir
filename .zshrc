@@ -143,8 +143,11 @@ alias gcloud-configure-docker='gcloud auth configure-docker'
 [[ -s ~/.profile ]] && source ~/.profile
 
 # Base16 Shell
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 # Set the default base16 background color
 base16_material-darker
 

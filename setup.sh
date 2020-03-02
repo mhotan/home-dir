@@ -12,6 +12,7 @@ brew bundle --file=${BASE_DIR}/brew/Brewfile
 echo "Installing Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+# Python virtualenvwrapper setup
 echo "Installing tools for managing Python environments"
 pip install virtualenvwrapper
 
@@ -31,21 +32,14 @@ if [ ! -d ~/.config/base16-idea ]; then
   git clone https://github.com/adilosa/base16-idea.git ~/.config/base16-idea
 fi
 
-echo "Installing python3 support for neovim"
-pip3 install --user neovim
-pip3 install sexpdata websocket-client
-
-echo "Fixing Ctrl+h issue for neovim"
-infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-tic $TERM.ti
-
-echo "Creating VIM related directories"
-mkdir -p ~/.vim/backup
-mkdir -p ~/.vim/swap
-mkdir -p ~/.vim/undo
-
 echo "Creating nvm config directory"
 mkdir -p ~/.nvm
+
+#############################################################################################
+##### Dependencies required for current VIM setup for .vimrc
+
+# Required to support vim-github-dashboard
+gem install json_pure
 
 #############################################################################################
 ##### Setting ZSH as the default shell
@@ -69,7 +63,6 @@ echo "Symlinking zshrc"
 ln -sfn "${BASE_DIR}/.zshrc" ~/.zshrc
 
 echo "Symlinking vimrc for neovim, vimrc, and ideavimrc"
-ln -sfn "${BASE_DIR}/.vimrc" ~/.config/nvim/init.vim
 ln -sfn "${BASE_DIR}/.vimrc" ~/.vimrc
 ln -sfn "${BASE_DIR}/.vimrc" ~/.ideavimrc
 
