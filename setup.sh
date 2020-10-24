@@ -1,6 +1,14 @@
 # Obtain a reference to the directory containing `setup.sh`
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Install SDKman for Java, Scala, SBT,
+# We will use SDK to 
+if ! type sdk > /dev/null; then
+  curl -s "https://get.sdkman.io" | bash
+fi
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java
+
 # Reference: http://brew.sh/
 echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
