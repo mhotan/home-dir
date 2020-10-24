@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 # 
 
@@ -10,7 +17,7 @@ export ZSH=~/.oh-my-zsh
 #ZSH_THEME="wezm"
 
 # Requires brew tap homebrew/cask-fonts && brew cask install font-hack-nerd-font
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_MODE="nerdfont-complete"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -71,8 +78,6 @@ exists() {
 
 if [ -s ~/.profile ]; then
   source ~/.profile
-else
-  echo "WARNING: Unable to find to find .profile file"
 fi
 
 
@@ -151,10 +156,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 # Set the default base16 background color
 base16_material-darker
 
-# Configure JEnv
-eval "$(jenv init -)"
-launchctl setenv JAVA_HOME "$(jenv javahome)"
-
 # NVM / Node environment manager
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
@@ -192,3 +193,18 @@ if [ /Users/michaelhotan/google-cloud-sdk/bin/kubectl ]; then source <(kubectl c
 # Setup Python virtual environments
 [ -d ~/dev/python/envs ] || mkdir ~/dev/python/envs
 export WORKON_HOME=~/dev/python/envs
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/michaelhotan/.sdkman"
+[[ -s "/Users/michaelhotan/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/michaelhotan/.sdkman/bin/sdkman-init.sh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+fpath=(/Users/michaelhotan/home-dir/zsh-completions $fpath)
+
+if [ -f ~/.secrets.sh ]; then
+    source ~/.secrets.sh
+else
+    print "404: ~/.secrets.sh not found."
+fi

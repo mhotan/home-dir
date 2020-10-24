@@ -27,10 +27,12 @@ alias dm-create-flexe-dev='docker-machine create -d virtualbox --virtualbox-disk
 alias eval-flexe-dev='eval $(dm env flexe-dev)'
 
 alias k8s-dev-oms='gcloud config set project flexe-dev-oms && gcloud container clusters get-credentials us-west --zone=us-west1-b'
-alias k8s-dev-wse='gcloud config set project flexe-dev-wse && gcloud container clusters get-credentials applications-primary --zone=us-west1-a'
+alias k8s-dev-wse='kubectl config use-context gke_flexe-dev-wse_us-west1-b_us-west'
 alias k8s-dev-sa='gcloud config set project flexe-dev-sa && gcloud container clusters get-credentials applications-primary --zone=us-west1-a'
 alias k8s-staging='gcloud config set project flexe-staging && gcloud container clusters get-credentials applications-primary --zone=us-west1-a'
-alias k8s-sandbox='gcloud config set project flexe-stable && gcloud container clusters get-credentials applications-primary-sandbox --zone=us-central1-a'
+alias k8s-sandbox='gcloud config set project flexe-stable && gcloud container clusters get-credentials us-central --zone=us-central1-a'
 alias k8s-production='gcloud config set project flexe-production && gcloud container clusters get-credentials applications-primary --zone=us-central1-a'
 alias k8s-infra='gcloud config set project flexe-main && gcloud container clusters get-credentials infrastructure --zone=us-west1-a'
 alias k8s-michael-sandbox='gcloud config set project flexe-dev && gcloud container clusters get-credentials michael-sandbox --region=us-west1'
+
+alias mr='lab merge-request'
