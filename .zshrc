@@ -58,16 +58,30 @@ export UPDATE_ZSH_DAYS=13
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(brew terraform common-aliases docker docker-compose git kubectl)
+# OS specific ZSH
+case `uname` in
+  Darwin)
+    # commands for OS X go here
+    # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+    # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+    # Example format: plugins=(rails git textmate ruby lighthouse)
+    # Add wisely, as too many plugins slow down shell startup.
+    plugins=(brew terraform common-aliases docker docker-compose git kubectl)
+    export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
-# User configuration
+    # NVM / Node environment manager
+    export NVM_DIR="$HOME/.nvm"
+    . "$(brew --prefix nvm)/nvm.sh"
+  ;;
+  Linux)
+    # commands for Linux go here
+    plugins=(terraform common-aliases docker docker-compose git kubectl)
+  ;;
+  FreeBSD)
+    # commands for FreeBSD go here
+  ;;
+esac
 
-export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
 
 ### Helper functions
 
@@ -79,7 +93,6 @@ exists() {
 if [ -s ~/.profile ]; then
   source ~/.profile
 fi
-
 
 CURRENT_COMPANY_RC_FILE="~/.flexerc"
 [[ -s "${CURRENT_COMPANY_RC_FILE}" ]] && source "${CURRENT_COMPANY_RC_FILE}"
@@ -97,12 +110,9 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export GIT_EDITOR="$EDITOR"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -133,7 +143,7 @@ alias dcr='docker-compose run'
 alias d='docker'
 alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
 alias dmip='docker-machine ip $(docker-machine active)'
-alias git='hub'
+alias git='lab'
 alias pr='git pull-request'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
@@ -155,10 +165,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 # Set the default base16 background color
 base16_material-darker
-
-# NVM / Node environment manager
-export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
 
 #if exists virtualenvwrapper.sh; then
 #  source `which virtualenvwrapper.sh`
@@ -191,8 +197,10 @@ export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 if [ /Users/michaelhotan/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 # Setup Python virtual environments
-[ -d ~/dev/python/envs ] || mkdir ~/dev/python/envs
-export WORKON_HOME=~/dev/python/envs
+if [ ! -d ~/dev/python/envs ]; then
+  mkdir -p ~/dev/python/envs
+  export WORKON_HOME=~/dev/python/envs
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/michaelhotan/.sdkman"
@@ -205,6 +213,4 @@ fpath=(/Users/michaelhotan/home-dir/zsh-completions $fpath)
 
 if [ -f ~/.secrets.sh ]; then
     source ~/.secrets.sh
-else
-    print "404: ~/.secrets.sh not found."
 fi
