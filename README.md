@@ -7,7 +7,11 @@ Version controlled set of files used to set up my home directory.  This project 
 ```sh
 $ cd ~/
 $ git clone https://github.com/mhotan/home-dir.git
-$ home-dir/setup.sh
+$ # MacOs
+$ home-dir/setup_mac.sh
+$ 
+$ # Linux
+$ sudo ./setup_linux.sh
 ```
 
 ### Update brew packages
