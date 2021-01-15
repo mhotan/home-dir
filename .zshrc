@@ -185,16 +185,18 @@ source ~/.flexe_zshrc
 eval "$(rbenv init -)"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/michaelhotan/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/michaelhotan/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
 
 # The next is to override imagemagick with imagemagick6
 # required for some versions of rmagick
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
-if [ /Users/michaelhotan/google-cloud-sdk/bin/kubectl ]; then source <(kubectl completion zsh); fi
+if ! type kubectl > /dev/null; then
+  source <(kubectl completion zsh)
+fi
 
 # Setup Python virtual environments
 if [ ! -d ~/dev/python/envs ]; then
@@ -203,13 +205,14 @@ if [ ! -d ~/dev/python/envs ]; then
 fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/michaelhotan/.sdkman"
-[[ -s "/Users/michaelhotan/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/michaelhotan/.sdkman/bin/sdkman-init.sh"
+# if [[ -f "~/.sdkman/bin/sdkman-init.sh" ]]; then
+#   source "~/.sdkman/bin/sdkman-init.sh"
+# fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-fpath=(/Users/michaelhotan/home-dir/zsh-completions $fpath)
+# fpath=(~/home-dir/zsh-completions $fpath)
 
 if [ -f ~/.secrets.sh ]; then
     source ~/.secrets.sh

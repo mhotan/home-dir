@@ -102,13 +102,12 @@ fi
 
 # Install pre-reqs for rbenv and ruby-build
 
-sudo apt install -y git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison \
-  build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
-
+sudo apt install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
 # Install rbenv to manage different versions of ruby
 if ! type rbenv > /dev/null; then
   echo "Installing rbenv"
-  sudo apt install -y rbenv
+  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 fi
 
 # Configure rbenv
