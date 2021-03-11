@@ -18,7 +18,7 @@ APT_FILE_NAME="${APT_DIR}/apt_packages"
 sudo apt-clone restore "${APT_FILE_NAME}.apt-clone.tar.gz"
 
 # Install SDKman for Java, Scala, SBT,
-# We will use SDK to 
+# We will use SDK to
 if ! type sdk > /dev/null; then
   curl -s "https://get.sdkman.io" | bash
 fi
@@ -45,7 +45,7 @@ fi
 
 if ! type zsh > /dev/null; then
   echo "Install zsh"
-  sudo apt install -y zsh 
+  sudo apt install -y zsh
 fi
 
 if [ "$(echo $0)" != "zsh" ]; then
@@ -131,20 +131,18 @@ rbenv install $(rbenv install -l | grep -v - | tail -1)
 # pip install virtualenvwrapper
 
 #############################################################################################
-##### Dependencies required for current VIM setup for .vimrc
+##### Install Awesome VIM
 
-# Required to support vim-github-dashboard
-gem install json_pure
+# Reference: https://github.com/amix/vimrc
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+ln -sfn "${BASE_DIR}/my_configs.vim" ~/.vim_runtime/my_configs.vim
 
 #############################################################################################
 ##### Symlink all necessary home directory files.
 
 echo "Symlinking zshrc"
 ln -sfn "${BASE_DIR}/.zshrc" ~/.zshrc
-
-echo "Symlinking vimrc for neovim, vimrc, and ideavimrc"
-ln -sfn "${BASE_DIR}/.vimrc" ~/.vimrc
-ln -sfn "${BASE_DIR}/.vimrc" ~/.ideavimrc
 
 echo "Symlinking tmux config"
 ln -sfn "${BASE_DIR}/.tmux.conf" ~/.tmux.conf
@@ -165,3 +163,21 @@ ln -sfn "${BASE_DIR}/.flexe_zshrc" ~/.flexe_zshrc
 # Install VSCode settings
 code --install-extension Shan.code-settings-sync
 
+# Install docker
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic test"
+sudo apt update
+sudo apt install -y docker-ce
+
+# docker-machine
+curl -L https://github.com/docker/machine/releases/download/v0.12.2/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+chmod +x /tmp/docker-machine &&
+sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+
+# docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &&
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Virtual box to create different VMs
+sudo apt install -y virtualbox

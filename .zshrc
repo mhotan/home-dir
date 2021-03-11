@@ -76,6 +76,11 @@ case `uname` in
   Linux)
     # commands for Linux go here
     plugins=(terraform common-aliases docker docker-compose git kubectl)
+
+    # NVM
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
   ;;
   FreeBSD)
     # commands for FreeBSD go here
@@ -204,11 +209,6 @@ if [ ! -d ~/dev/python/envs ]; then
   export WORKON_HOME=~/dev/python/envs
 fi
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# if [[ -f "~/.sdkman/bin/sdkman-init.sh" ]]; then
-#   source "~/.sdkman/bin/sdkman-init.sh"
-# fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -217,3 +217,9 @@ fi
 if [ -f ~/.secrets.sh ]; then
     source ~/.secrets.sh
 fi
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# Let SDKMAN configure JAVA_HOME
+export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
+
