@@ -71,8 +71,10 @@ fi
 echo "Symlinking zshrc"
 ln -sfn "${BASE_DIR}/.zshrc" ~/.zshrc
 
-echo "Symlinking p10k configuration"
-ln -sfn "${BASE_DIR}/etc/.p10k.zsh" ~/.p10k.zsh
+# Symlinking p10k configuration does not appear to work
+# Results in configuring p10k for each new development machine
+#echo "Symlinking p10k configuration"
+#ln -sfn "${BASE_DIR}/etc/.p10k.zsh" ~/.p10k.zsh
 
 echo "Symlinking tmux config"
 ln -sfn "${BASE_DIR}/.tmux.conf" ~/.tmux.conf
