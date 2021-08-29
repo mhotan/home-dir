@@ -75,7 +75,7 @@ case `uname` in
   ;;
   Linux)
     # commands for Linux go here
-    plugins=(terraform common-aliases docker docker-compose git kubectl)
+    plugins=(terraform common-aliases docker docker-compose git kubectl node npm npx nvm)
 
     # NVM
     export NVM_DIR="$HOME/.nvm"
@@ -99,22 +99,9 @@ if [ -s ~/.profile ]; then
   source ~/.profile
 fi
 
-CURRENT_COMPANY_RC_FILE="~/.flexerc"
-[[ -s "${CURRENT_COMPANY_RC_FILE}" ]] && source "${CURRENT_COMPANY_RC_FILE}"
-
-#if [ -n "$DIGITAL_OCEAN_ACCESS_TOKEN" ]; then
-#  dm_create_digitalocean() {
-#    docker-machine create --driver digitalocean --digitalocean-access-token "${DIGITAL_OCEAN_ACCESS_TOKEN}" "$1"
-#  }
-#else
-#  echo "WARNING: No Digital Ocean access token found."
-#fi
-
 source $ZSH/oh-my-zsh.sh
-
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export GIT_EDITOR="$EDITOR"
@@ -142,14 +129,9 @@ alias dev='cd ~/dev/'
 alias vi='vim'
 
 alias be='bundle exec'
-alias dm='docker-machine'
-alias dc='docker-compose'
-alias dcr='docker-compose run'
 alias d='docker'
 alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
 alias dmip='docker-machine ip $(docker-machine active)'
-alias git='lab'
-alias pr='git pull-request'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
 alias gbda="git branch | grep -v "master" | xargs git branch -D"
@@ -177,18 +159,6 @@ base16_material-darker
 
 HELPDIR=/usr/local/share/zsh/help
 
-export PATH="$HOME/.jenv/bin:$PATH"
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/icu4c/bin:$PATH"
-export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH=${GOPATH}/bin:$PATH
-
-source ~/.flexe_zshrc
-
-# User RBenv configuration
-eval "$(rbenv init -)"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -199,10 +169,6 @@ if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/co
 # required for some versions of rmagick
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
-if ! type kubectl > /dev/null; then
-  source <(kubectl completion zsh)
-fi
-
 # Setup Python virtual environments
 if [ ! -d ~/dev/python/envs ]; then
   mkdir -p ~/dev/python/envs
@@ -211,8 +177,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# fpath=(~/home-dir/zsh-completions $fpath)
 
 if [ -f ~/.secrets.sh ]; then
     source ~/.secrets.sh
@@ -223,3 +187,4 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Let SDKMAN configure JAVA_HOME
 export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
 
+[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
