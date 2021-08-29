@@ -9,7 +9,7 @@ BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #   Skip confirmation messages and only require packages that are required
 sudo pacman -Syyu
 sudo pacman --sync --noconfirm --needed snapd tldr base-devel yay \
-  community/oh-my-zsh community/zsh-theme-powerlevel10k nvm git \
+  community/oh-my-zsh nvm git \
   community/github-cli community/aws-cli community/terraform \
   core/curl community/docker community/docker-compose community/docker-machine \
   community/virtualbox unzip zip community/discord extra/vim
