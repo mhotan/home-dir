@@ -15,7 +15,8 @@ sudo pacman --sync --noconfirm --needed snapd tldr base-devel yay \
   community/virtualbox unzip zip community/discord extra/vim
 
 ## Commenting out yay because of interactive shell is inconvenient
-# yay -S --answerclean All --answerdiff All aur/gitlab-glab-bin
+#yay -S --answerclean All --answerdiff All aur/gitlab-glab-bin aur/insync \
+
 
 # Snapd and Snap store
 # Install applications that are snap managed 
@@ -29,7 +30,18 @@ snap_executable=/var/lib/snapd/snap
 [ -f $snap_executable ] && [ ! -L $snap_executable ] && sudo ln -s /var/lib/snapd/snap /snap  
 sudo snap install code --classic
 # Install VSCode settings
+echo "Installing Visual Studio Code"
 code --install-extension Shan.code-settings-sync
+
+# Install Android Studio
+echo "Installing Android Studio"
+sudo snap install android-studio --classic
+
+echo "Installing Intellij Community"
+sudo snap install intellij-idea-community --classic
+
+echo "Installing GitKraken"
+sudo snap install gitkraken --classic
 
 # Install SDKman for Java, Scala, Kotlin, Gradle, SBT, etc
 # We will use SDK to
