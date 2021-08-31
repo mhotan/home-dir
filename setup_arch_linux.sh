@@ -8,11 +8,26 @@ BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Install all required packages through pacman
 #   Skip confirmation messages and only require packages that are required
 sudo pacman -Syyu
-sudo pacman --sync --noconfirm --needed snapd tldr base-devel yay \
-  community/oh-my-zsh nvm git \
-  community/github-cli community/aws-cli community/terraform \
-  core/curl community/docker community/docker-compose community/docker-machine \
-  community/virtualbox unzip zip community/discord extra/vim
+sudo pacman --sync --noconfirm --needed \
+  snapd \
+  tldr \
+  base-devel \
+  yay \
+  community/oh-my-zsh \
+  nvm \
+  git \
+  community/github-cli \
+  community/aws-cli \
+  community/terraform \
+  core/curl \
+  community/docker \
+  community/docker-compose \
+  community/docker-machine \
+  community/virtualbox \
+  unzip \
+  zip \
+  community/discord \
+  extra/vim
 
 ## Commenting out yay because of interactive shell is inconvenient
 #yay -S --answerclean All --answerdiff All aur/gitlab-glab-bin aur/insync \

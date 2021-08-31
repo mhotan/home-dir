@@ -99,7 +99,6 @@ if [ -s ~/.profile ]; then
   source ~/.profile
 fi
 
-source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 export VISUAL=vim
@@ -188,3 +187,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
 
 [[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
+
+# Init oh-my-zsh
+source $ZSH/oh-my-zsh.sh
