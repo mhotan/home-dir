@@ -40,8 +40,19 @@ if [ ! -d ~/.config/base16-idea ]; then
   git clone https://github.com/adilosa/base16-idea.git ~/.config/base16-idea
 fi
 
+#############################################################################################
+###### Installing Node.js through nvm (nvm installed through brew)
+
 echo "Creating nvm config directory"
 mkdir -p ~/.nvm
+
+# Install latest stable node.js version
+nvm install --lts
+# Always default to the latest available node version
+nvm alias default node
+nvm use --lts
+npm install -g npx
+npm install -g expo-cli
 
 #############################################################################################
 ##### Dependencies required for current VIM setup for .vimrc
