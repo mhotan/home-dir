@@ -97,42 +97,11 @@ if ! type kubectl > /dev/null; then
   sudo apt-get install -y kubectl
 fi
 
-###########################################################################################
-## Install Ruby Stuff
-
-# Install pre-reqs for rbenv and ruby-build
-
-sudo apt install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev
-# Install rbenv to manage different versions of ruby
-if ! type rbenv > /dev/null; then
-  echo "Installing rbenv"
-  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-fi
-
-# Configure rbenv
-touch ~/.zshrc
-if ! grep -q "rbenv init -" ~/.zshrc; then
-  echo "Ensuring rbenv is configured in zshrc"
-  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
-  echo 'eval "$(rbenv init -)"' >> ~/.zshrc
-  source ~/.zshrc
-fi
-
-# install latest stable ruby version
-echo "Installing latest ruby verson"
-rbenv install $(rbenv install -l | grep -v - | tail -1)
-
-# echo "Creating nvm config directory"
-# mkdir -p ~/.nvm
-
 # Python virtualenvwrapper setup
 # echo "Installing tools for managing Python environments"
 # pip install virtualenvwrapper
 
-#############################################################################################
 ##### Install Awesome VIM
-
 # Reference: https://github.com/amix/vimrc
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
@@ -150,9 +119,6 @@ ln -sfn "${BASE_DIR}/.tmux.conf" ~/.tmux.conf
 echo "Symlinking gitconfig"
 ln -sfn "${BASE_DIR}/.gitconfig" ~/.gitconfig
 ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
-
-echo "Symlinking company specific rc file"
-ln -sfn "${BASE_DIR}/.flexe_zshrc" ~/.flexe_zshrc
 
 #############################################################################################
 ##### Installing Ruby and Python dependencies.
