@@ -11,7 +11,7 @@ fi
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sudo apt update && \
-  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg
+  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone
 
 APT_DIR="${BASE_DIR}/etc/apt"
 APT_FILE_NAME="${APT_DIR}/apt_packages"
