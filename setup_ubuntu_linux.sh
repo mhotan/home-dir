@@ -13,9 +13,9 @@ BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 sudo apt update && \
   sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone
 
-APT_DIR="${BASE_DIR}/etc/apt"
-APT_FILE_NAME="${APT_DIR}/apt_packages"
-sudo apt-clone restore "${APT_FILE_NAME}.apt-clone.tar.gz"
+# APT_DIR="${BASE_DIR}/etc/apt"
+# APT_FILE_NAME="${APT_DIR}/apt_packages"
+# sudo apt-clone restore "${APT_FILE_NAME}.apt-clone.tar.gz"
 
 # Install SDKman for Java, Scala, SBT,
 # We will use SDK to
@@ -35,10 +35,11 @@ fi
 # Install snaps
 # Snap does not make it easy to script when some packages are already installed and some applications
 # require --classic because those apps manage their own updates.
-
-# SNAPFILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/etc/snapd"
-# SNAP_FILE_PATH=${SNAPFILE_DIR}/Snapfile
-# snap install $( cat $SNAP_FILE_PATH )
+sudo snap install code --classic
+sudo snap install flutter --classic
+sudo snap install android-studio --classic
+sudo snap install intellij-idea-community --classic
+sudo snap install gitkraken --classic
 
 ###########################################################################################
 ## Install shell stuff
@@ -103,7 +104,9 @@ fi
 
 ##### Install Awesome VIM
 # Reference: https://github.com/amix/vimrc
-git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+if [ ! -d ~/.vim_runtime ]; then
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+fi
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 ln -sfn "${BASE_DIR}/my_configs.vim" ~/.vim_runtime/my_configs.vim
 
@@ -127,23 +130,22 @@ ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
 # gem install rsense
 
 # Install VSCode settings
-code --install-extension Shan.code-settings-sync
+# code --install-extension Shan.code-settings-sync
 
 # Install docker
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic test"
-sudo apt update
-sudo apt install -y docker-ce
-
-# docker-machine
-curl -L https://github.com/docker/machine/releases/download/v0.12.2/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
-chmod +x /tmp/docker-machine &&
-sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
-
-# docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &&
-sudo chmod +x /usr/local/bin/docker-compose
+# https://docs.docker.com/engine/install/ubuntu/
+sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+#echo \
+#  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+#  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
 
 # Virtual box to create different VMs
-sudo apt install -y virtualbox
+# sudo apt install -y virtualbox
