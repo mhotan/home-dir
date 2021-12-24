@@ -41,8 +41,10 @@ sudo snap install snap-store
 ## Install necessary applications through snap store
 # snap symlink
 # https://forum.snapcraft.io/t/fedora-29-cant-install-classic-snaps/10342
-snap_executable=/var/lib/snapd/snap
-[ -f $snap_executable ] && [ ! -L $snap_executable ] && sudo ln -s /var/lib/snapd/snap /snap  
+
+if [[ ! -L "/snap" ]]; then
+  sudo ln -s /var/lib/snapd/snap /snap  
+fi
 sudo snap install code --classic
 # Install VSCode settings
 echo "Installing Visual Studio Code"
