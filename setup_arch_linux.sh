@@ -32,7 +32,6 @@ sudo pacman --sync --noconfirm --needed \
 ## Commenting out yay because of interactive shell is inconvenient
 #yay -S --answerclean All --answerdiff All aur/gitlab-glab-bin aur/insync \
 
-
 # Snapd and Snap store
 # Install applications that are snap managed 
 sudo systemctl enable --now snapd.socket
@@ -46,6 +45,7 @@ if [[ ! -L "/snap" ]]; then
   sudo ln -s /var/lib/snapd/snap /snap  
 fi
 sudo snap install code --classic
+sudo snap install flutter --classic
 # Install VSCode settings
 echo "Installing Visual Studio Code"
 code --install-extension Shan.code-settings-sync
