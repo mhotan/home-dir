@@ -2,11 +2,6 @@
 
 set -e
 
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root"
-  exit
-fi
-
 # Obtain a reference to the directory containing `setup.sh`
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -134,18 +129,5 @@ ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
 
 # Install docker
 # https://docs.docker.com/engine/install/ubuntu/
-sudo apt-get update
-sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-#echo \
-#  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-#  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
-
-# Virtual box to create different VMs
-# sudo apt install -y virtualbox
+sudo snap install docker
+sudo apt-get install docker-compose
