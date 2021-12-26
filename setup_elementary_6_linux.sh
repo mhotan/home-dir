@@ -6,7 +6,9 @@ set -e
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sudo apt update && \
-  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone
+  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone aptitude synaptic linux-generic-hwe-20.04 && \
+  sudo add-apt-repository ppa:graphics-drivers/ppa && \
+  sudo apt update
 
 # APT_DIR="${BASE_DIR}/etc/apt"
 # APT_FILE_NAME="${APT_DIR}/apt_packages"
