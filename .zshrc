@@ -75,7 +75,7 @@ case `uname` in
   ;;
   Linux)
     # commands for Linux go here
-    plugins=(terraform common-aliases docker docker-compose git kubectl node npm npx nvm)
+    plugins=(terraform common-aliases docker docker-compose git kubectl node npm nvm)
 
     # NVM
     export NVM_DIR="$HOME/.nvm"
