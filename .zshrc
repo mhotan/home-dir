@@ -84,7 +84,12 @@ case `uname` in
 
     # Configure tfenv (if properly installed)
     # Reference setup_elementary_6_linux.sh
-    if [ -d "$HOME/.tfenv/bin" ]; then export PATH="$HOME/.tfenv/bin:$PATH"; fi
+    . ~/.profile
+    if [ -d "$HOME/.tfenv/bin" ]; then 
+      mkdir -p ~/.local/bin/
+      . ~/.profile
+      ln -s ~/.tfenv/bin/* ~/.local/bin
+    fi
   ;;
   FreeBSD)
     # commands for FreeBSD go here
