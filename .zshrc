@@ -81,6 +81,10 @@ case `uname` in
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+    # Configure tfenv (if properly installed)
+    # Reference setup_elementary_6_linux.sh
+    if [ -d "$HOME/.tfenv/bin" ]; then export PATH="$HOME/.tfenv/bin:$PATH"; fi
   ;;
   FreeBSD)
     # commands for FreeBSD go here
@@ -166,7 +170,7 @@ if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/co
 
 # The next is to override imagemagick with imagemagick6
 # required for some versions of rmagick
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+# export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
 # Setup Python virtual environments
 if [ ! -d ~/dev/python/envs ]; then
@@ -187,6 +191,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
 
 [[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
+
+SNAP_DIR="/snap"
+# Add Google Cloud completions if Google Cloud SDK installed through Snap
+GOOGLE_CLOUD_ZSH_COMPLETIONS="${SNAP_DIR}/google-cloud-sdk/current/completion.zsh.inc"
+[[ -f $GOOGLE_CLOUD_ZSH_COMPLETIONS ]] && source $GOOGLE_CLOUD_ZSH_COMPLETIONS
 
 # Init oh-my-zsh
 source $ZSH/oh-my-zsh.sh

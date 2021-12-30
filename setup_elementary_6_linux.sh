@@ -6,7 +6,8 @@ set -e
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sudo apt update && \
-  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone aptitude synaptic linux-generic-hwe-20.04 && \
+  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone aptitude synaptic linux-generic-hwe-20.04 \
+                        software-properties-common && \
   sudo add-apt-repository ppa:graphics-drivers/ppa && \
   sudo apt update
 
@@ -37,6 +38,7 @@ sudo snap install flutter --classic
 sudo snap install android-studio --classic
 sudo snap install intellij-idea-community --classic
 sudo snap install gitkraken --classic
+sudo snap install google-cloud-sdk --classic
 
 ###########################################################################################
 ## Install shell stuff
@@ -106,6 +108,14 @@ if [ ! -d ~/.vim_runtime ]; then
 fi
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 ln -sfn "${BASE_DIR}/my_configs.vim" ~/.vim_runtime/my_configs.vim
+
+# Install tfenv to manage different terraform versions
+# Terraform used to manage Infrastructure across all projects.
+# Ref: https://github.com/tfutils/tfenv#manual
+if [ ! -d ~/.tfenv ]; then
+  echo "Install tfenv"
+  git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+fi
 
 #############################################################################################
 ##### Symlink all necessary home directory files.
