@@ -88,7 +88,7 @@ case `uname` in
     if [ -d "$HOME/.tfenv/bin" ]; then 
       mkdir -p ~/.local/bin/
       . ~/.profile
-      ln -s ~/.tfenv/bin/* ~/.local/bin
+      ln -sfn ~/.tfenv/bin/* ~/.local/bin
     fi
   ;;
   FreeBSD)
