@@ -39,6 +39,9 @@ sudo snap install android-studio --classic
 sudo snap install intellij-idea-community --classic
 sudo snap install gitkraken --classic
 sudo snap install google-cloud-sdk --classic
+sudo snap install slack --classic
+sudo snap install discord
+sudo snap install libreoffice
 
 ###########################################################################################
 ## Install shell stuff
@@ -92,10 +95,10 @@ if ! type gcloud > /dev/null; then
   sudo apt-get update && sudo apt-get install -y google-cloud-sdk
 fi
 
-if ! type kubectl > /dev/null; then
-  echo "Installing kubectl"
-  sudo apt-get install -y kubectl
-fi
+#if ! type kubectl > /dev/null; then
+#  echo "Installing kubectl"
+#  sudo apt-get install -y kubectl
+#fi
 
 # Python virtualenvwrapper setup
 # echo "Installing tools for managing Python environments"

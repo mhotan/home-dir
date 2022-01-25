@@ -10,8 +10,8 @@ $ git clone https://github.com/mhotan/home-dir.git
 $ # MacOs
 $ home-dir/setup_mac.sh
 $ 
-$ # Linux
-$ sudo ./setup_linux.sh
+$ # Elementary OS 6
+$ sudo ./setup_elementary_6_linux.sh
 ```
 
 ### Update brew packages
