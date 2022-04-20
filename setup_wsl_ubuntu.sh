@@ -6,42 +6,15 @@ set -e
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sudo apt update && \
-  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone aptitude synaptic linux-generic-hwe-20.04 \
+  sudo apt install -y curl vim apt-transport-https ca-certificates gnupg apt-clone aptitude synaptic \
                         software-properties-common && \
-  sudo add-apt-repository ppa:graphics-drivers/ppa && \
   sudo apt update
-
-# APT_DIR="${BASE_DIR}/etc/apt"
-# APT_FILE_NAME="${APT_DIR}/apt_packages"
-# sudo apt-clone restore "${APT_FILE_NAME}.apt-clone.tar.gz"
-
-# Install SDKman for Java, Scala, SBT,
-# We will use SDK to
-if ! type sdk > /dev/null; then
-  curl -s "https://get.sdkman.io" | bash
-fi
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java
 
 # Install snap
 if ! type snap > /dev/null; then
   echo "Install snap"
   sudo apt install -y snapd
-  sudo snap install snap-store
 fi
-
-# Install snaps
-# Snap does not make it easy to script when some packages are already installed and some applications
-# require --classic because those apps manage their own updates.
-sudo snap install code --classic
-sudo snap install flutter --classic
-sudo snap install android-studio --classic
-sudo snap install intellij-idea-community --classic
-sudo snap install gitkraken --classic
-sudo snap install google-cloud-sdk --classic
-sudo snap install slack --classic
-sudo snap install discord
-sudo snap install libreoffice
 
 ###########################################################################################
 ## Install shell stuff
@@ -92,7 +65,7 @@ if ! type gcloud > /dev/null; then
   echo "Install gcloud"
   echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
   curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-  sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+  sudo apt-get update && sudo apt-get install google-cloud-cli
 fi
 
 #if ! type kubectl > /dev/null; then
