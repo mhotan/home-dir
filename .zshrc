@@ -120,6 +120,12 @@ export GIT_EDITOR="$EDITOR"
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
+# Delete branches that matches prefix.
+gbdme () {
+  pattern=${1:-"michael/*"}
+  git branch | grep "${pattern}" | xargs git branch -D
+}
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -140,11 +146,12 @@ alias be='bundle exec'
 alias d='docker'
 alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
 alias dmip='docker-machine ip $(docker-machine active)'
+alias dc='docker-compose'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
-alias gbda="git branch | grep -v "master" | xargs git branch -D"
 alias gpme='git push mhotan $(git_current_branch)'
 alias gcloud-configure-docker='gcloud auth configure-docker'
+alias pr='gh pr create --fill'
 
 # TODO Figure out to escape following commadn to clean up old local branches
 # git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
@@ -211,4 +218,8 @@ if [ -d $HOME/Android/Sdk ]; then
     export PATH=$PATH:$ANDROID_HOME/tools
     export PATH=$PATH:$ANDROID_HOME/tools/bin
     export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
+
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi

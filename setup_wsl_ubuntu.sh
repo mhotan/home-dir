@@ -68,6 +68,11 @@ if ! type gcloud > /dev/null; then
   sudo apt-get update && sudo apt-get install google-cloud-cli
 fi
 
+if ! type nvm > /dev/null; then
+  echo "Installing NVM"
+  curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+fi
+
 #if ! type kubectl > /dev/null; then
 #  echo "Installing kubectl"
 #  sudo apt-get install -y kubectl
