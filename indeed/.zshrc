@@ -35,7 +35,6 @@ export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
-
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
@@ -62,6 +61,11 @@ export UPDATE_ZSH_DAYS=13
 case `uname` in
   Darwin)
     # commands for OS X go here
+    
+    # powerlevel10k
+    ZSH_THEME_FILE="$(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme"
+    [[ -s "$ZSH_THEME_FILE" ]] && source $ZSH_THEME_FILE
+
     # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
     # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
     # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -146,6 +150,7 @@ alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
 alias gbda="git branch | grep -v "master" | xargs git branch -D"
 alias gpme='git push mhotan $(git_current_branch)'
+alias gcurl='curl --header "Authorization: Bearer $(gcloud auth print-identity-token)"'
 
 # Base16 Shell
 # Base16 Shell
@@ -170,3 +175,29 @@ if [ -e "${INDEED_ENV_DIR}/etc/indeedrc" ]; then
     . "${INDEED_ENV_DIR}/etc/indeedrc"
 fi
 # END env Setup -- Managed by Ansible DO NOT EDIT.
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
+
+# assume nvm exists if the directory exists
+if [ -d "${HOME}/.nvm" ]; then 
+  # Ref: https://github.com/nvm-sh/nvm#zsh
+  autoload -U add-zsh-hook
+  load-nvmrc() {
+    local node_version="$(nvm version)"
+    local nvmrc_path="$(nvm_find_nvmrc)"
+
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+      if [ "$nvmrc_node_version" = "N/A" ]; then
+        nvm install
+      elif [ "$nvmrc_node_version" != "$node_version" ]; then
+        nvm use
+      fi
+    elif [ "$node_version" != "$(nvm version default)" ]; then
+      echo "Reverting to nvm default version"
+      nvm use default
+    fi
+  }
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
+fi
