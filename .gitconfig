@@ -3,3 +3,5 @@
 	email = michael.hotan@gmail.com
 [core]
 	editor = vim
+[safe]
+	directory = .

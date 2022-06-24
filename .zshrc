@@ -223,3 +223,8 @@ fi
 if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
+# Add Solana to local path if it exists
+if [ -d $HOME/.local/share/solana/install/active_release/bin ]; then
+  export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
+fi

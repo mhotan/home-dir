@@ -55,9 +55,9 @@ fi
 
 # Install lab to wrap git or hub
 # Reference: https://github.com/zaquestion/lab
-if ! type lab > /dev/null; then
-  echo "Installing lab"
-  curl -s https://raw.githubusercontent.com/zaquestion/lab/master/install.sh | sudo bash
+if ! type brew > /dev/null; then
+  echo "Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 ## GCP CLI
@@ -72,15 +72,6 @@ if ! type nvm > /dev/null; then
   echo "Installing NVM"
   curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 fi
-
-#if ! type kubectl > /dev/null; then
-#  echo "Installing kubectl"
-#  sudo apt-get install -y kubectl
-#fi
-
-# Python virtualenvwrapper setup
-# echo "Installing tools for managing Python environments"
-# pip install virtualenvwrapper
 
 ##### Install Awesome VIM
 # Reference: https://github.com/amix/vimrc
@@ -122,5 +113,5 @@ ln -sfn "${BASE_DIR}/.gitconfig_global" ~/.gitconfig_global
 
 # Install docker
 # https://docs.docker.com/engine/install/ubuntu/
-sudo snap install docker
-sudo apt-get install docker-compose
+# sudo snap install docker
+sudo apt-get install -y docker-compose
