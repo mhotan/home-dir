@@ -58,6 +58,8 @@ export UPDATE_ZSH_DAYS=13
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+
 # OS specific ZSH
 case `uname` in
   Darwin)
@@ -66,7 +68,7 @@ case `uname` in
     # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
     # Example format: plugins=(rails git textmate ruby lighthouse)
     # Add wisely, as too many plugins slow down shell startup.
-    plugins=(brew terraform common-aliases docker docker-compose git kubectl)
+    plugins=(brew terraform common-aliases docker docker-compose git kubectl virtualenvwrapper)
     export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
     # NVM / Node environment manager
@@ -75,7 +77,7 @@ case `uname` in
   ;;
   Linux)
     # commands for Linux go here
-    plugins=(terraform common-aliases docker docker-compose git kubectl node npm nvm)
+    plugins=(terraform common-aliases docker docker-compose git kubectl node npm nvm virtualenvwrapper)
 
     # NVM
     export NVM_DIR="$HOME/.nvm"
@@ -228,3 +230,7 @@ fi
 if [ -d $HOME/.local/share/solana/install/active_release/bin ]; then
   export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
 fi
+
+# Python VirtualEnvWrapper
+# Add the bin folder to $PATH before the plugins load
+PATH=$HOME/.local/bin:$PATH
