@@ -14,7 +14,7 @@ echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo "Installing Homebrew packages"
-brew bundle --file=${BASE_DIR}/brew/Brewfile
+brew bundle --file=${BASE_DIR}/etc/brew/Brewfile
 
 # Reference: https://github.com/robbyrussell/oh-my-zsh
 echo "Installing Oh My ZSH"
@@ -27,12 +27,6 @@ pip install virtualenvwrapper
 echo "Creating ~/.config directories"
 # Implictly creates .config
 mkdir -p ~/.config/nvim/backup ~/.config/nvim/swap ~/.config/nvim/undo
-
-# Install base16-shell
-if [ ! -d ~/.config/base16-shell ]; then
-  echo "Downloading base16-shell"
-  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
-fi
 
 # Install base16-shell
 if [ ! -d ~/.config/base16-idea ]; then
@@ -91,9 +85,6 @@ ln -sfn "${BASE_DIR}/.tmux.conf" ~/.tmux.conf
 echo "Symlinking gitconfig"
 ln -sfn "${BASE_DIR}/config/git/osx/.gitconfig" ~/.gitconfig
 ln -sfn "${BASE_DIR}/config/git/osx/.gitconfig_global" ~/.gitconfig_global
-
-echo "Symlinking company specific rc file"
-ln -sfn "${BASE_DIR}/.flexe_zshrc" ~/.flexe_zshrc
 
 echo "Symlinking p10k config"
 ln -sfn "${BASE_DIR}/.p10k.zsh" ~/.p10k.zsh
