@@ -140,11 +140,8 @@ gbdme () {
 
 # Custom git push alias 
 
-alias brew_upgrade='brew update && brew upgrade && brew cleanup'
 alias dev='cd ~/dev/'
-
 alias vi='vim'
-
 alias be='bundle exec'
 alias d='docker'
 alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
@@ -152,11 +149,11 @@ alias dmip='docker-machine ip $(docker-machine active)'
 alias dc='docker-compose'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
-alias gpme='git push mhotan $(git_current_branch)'
+alias gpme='git push michael $(git_current_branch)'
 alias gcloud-configure-docker='gcloud auth configure-docker'
 alias pr='gh pr create --fill'
 
-# TODO Figure out to escape following commadn to clean up old local branches
+# TODO Figure out to escape following command to clean up old local branches
 # git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
 
 # Source ~/.profile if exist.
@@ -201,12 +198,21 @@ GOOGLE_CLOUD_ZSH_COMPLETIONS="/usr/local/Caskroom/google-cloud-sdk/latest/google
 # Init oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-if [ -d $HOME/Android/Sdk ]; then
-    export ANDROID_HOME=$HOME/Android/Sdk
-    export PATH=$PATH:$ANDROID_HOME/emulator
-    export PATH=$PATH:$ANDROID_HOME/tools
-    export PATH=$PATH:$ANDROID_HOME/tools/bin
-    export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+if [ -d $HOME/Android/Sdk ]; then\
+  # Windows WSL2
+  export ANDROID_HOME=$HOME/Android/Sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+elif [ -d $HOME/Library/Android/sdk ]; then
+  # MacOS
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
 fi
 
 if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
@@ -221,6 +227,14 @@ fi
 # Python VirtualEnvWrapper
 # Add the bin folder to $PATH before the plugins load
 PATH=$HOME/.local/bin:$PATH
+
+###############################################################
+## OpenSSL@3 
+# Prefer OpenSSL 3 if it has been installed. I.E. `brew install openssl`
+
+if [ -d '/usr/local/opt/openssl@3/bin' ]; then
+  export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+fi
 
 ###############################################################
 ## zplug
