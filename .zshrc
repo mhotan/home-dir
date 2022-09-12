@@ -194,9 +194,8 @@ export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
 
 [[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
 
-SNAP_DIR="/snap"
 # Add Google Cloud completions if Google Cloud SDK installed through Snap
-GOOGLE_CLOUD_ZSH_COMPLETIONS="${SNAP_DIR}/google-cloud-sdk/current/completion.zsh.inc"
+GOOGLE_CLOUD_ZSH_COMPLETIONS="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 [[ -f $GOOGLE_CLOUD_ZSH_COMPLETIONS ]] && source $GOOGLE_CLOUD_ZSH_COMPLETIONS
 
 # Init oh-my-zsh
