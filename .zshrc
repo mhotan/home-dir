@@ -66,7 +66,7 @@ case `uname` in
     # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
     # Example format: plugins=(rails git textmate ruby lighthouse)
     # Add wisely, as too many plugins slow down shell startup.
-    plugins=(brew terraform common-aliases docker docker-compose git kubectl)
+    plugins=(brew terraform common-aliases docker git kubectl)
     export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
     # NVM / Node environment manager
@@ -146,7 +146,7 @@ alias be='bundle exec'
 alias d='docker'
 alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
 alias dmip='docker-machine ip $(docker-machine active)'
-alias dc='docker-compose'
+alias dc='docker compose'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
 alias gpme='git push michael $(git_current_branch)'
@@ -160,12 +160,6 @@ alias pr='gh pr create --fill'
 [[ -s ~/.profile ]] && source ~/.profile
 
 HELPDIR=/usr/local/share/zsh/help
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
 
 # The next is to override imagemagick with imagemagick6
 # required for some versions of rmagick
@@ -194,6 +188,12 @@ export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
 # Add Google Cloud completions if Google Cloud SDK installed through Snap
 GOOGLE_CLOUD_ZSH_COMPLETIONS="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 [[ -f $GOOGLE_CLOUD_ZSH_COMPLETIONS ]] && source $GOOGLE_CLOUD_ZSH_COMPLETIONS
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Init oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -234,6 +234,14 @@ PATH=$HOME/.local/bin:$PATH
 
 if [ -d '/usr/local/opt/openssl@3/bin' ]; then
   export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+fi
+
+###############################################################
+## Go setup
+
+# Add go binaries to path
+if [[ $(command -v go) ]]; then
+  export PATH=$PATH:$(go env GOPATH)/bin
 fi
 
 ###############################################################
