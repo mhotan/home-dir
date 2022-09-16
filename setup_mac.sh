@@ -49,8 +49,16 @@ npm install -g npx
 npm install -g expo-cli
 
 #############################################################################################
-##### Dependencies required for current VIM setup for .vimrc
+## vimrc 
+# https://github.com/amix/vimrc
 
+if [ ! -d "$HOME/.vim_runtime" ]; then
+  echo "Installing vim runtime"
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+  sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh
+fi
+
+##### Dependencies required for current VIM setup for .vimrc
 # Required to support vim-github-dashboard
 gem install json_pure
 
