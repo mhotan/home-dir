@@ -2,14 +2,14 @@
 	excludesfile = /Users/michaelhotan/home-dir/.gitignore_global
 	editor = vim
 [difftool "sourcetree"]
-	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [user]
 	name = Michael Hotan
-	email = michael@flexe.com
+	email = michael@usegradient.xyz
 [gui]
 [diff]
 	tool = Kaleidoscope
@@ -27,8 +27,6 @@
 	smudge = git-lfs smudge -- %f
 	required = true
 	process = git-lfs filter-process
-[gui]
-	recentrepo = /Users/mhotan/dev/inkling/inkling-mediaservice
 [interactive]
   singlekey = true
 [url "ssh://git@gitlab.com/"]

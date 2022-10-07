@@ -198,7 +198,6 @@ if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/co
 # Init oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-
 if [ -d $HOME/Android/Sdk ]; then\
   # Windows WSL2
   export ANDROID_HOME=$HOME/Android/Sdk
@@ -242,6 +241,14 @@ fi
 # Add go binaries to path
 if [[ $(command -v go) ]]; then
   export PATH=$PATH:$(go env GOPATH)/bin
+fi
+
+###############################################################
+## Postgres libpq
+
+LIBPQ_BIN_DIR="/usr/local/opt/libpq/bin"
+if [ -d $LIBPQ_BIN_DIR ]; then
+  export PATH="$LIBPQ_BIN_DIR:$PATH"
 fi
 
 ###############################################################
