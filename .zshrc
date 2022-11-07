@@ -150,14 +150,12 @@ alias dc='docker compose'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
 alias gpme='git push michael $(git_current_branch)'
+alias gbDme='git branch -D $(printf "%s\n" $(git branch) | grep 'michael/')'
 alias gcloud-configure-docker='gcloud auth configure-docker'
 alias pr='gh pr create --fill'
 
 # TODO Figure out to escape following command to clean up old local branches
 # git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
-
-# Source ~/.profile if exist.
-[[ -s ~/.profile ]] && source ~/.profile
 
 HELPDIR=/usr/local/share/zsh/help
 
@@ -173,10 +171,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-if [ -f ~/.secrets.sh ]; then
-    source ~/.secrets.sh
-fi
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -252,6 +246,13 @@ if [ -d $LIBPQ_BIN_DIR ]; then
 fi
 
 ###############################################################
+## Local non-revision controlled profile
+
+if [ -f ~/.local.zsh ]; then
+  source ~/.local.zsh
+fi
+
+###############################################################
 ## zplug
 
 if [ -d $HOME/.zplug ]; then
@@ -265,6 +266,6 @@ if [ -d $HOME/.zplug ]; then
   zplug load
 
   ## Post Load actions
-   base16_material-darker
+  base16_material-darker
 fi
 
