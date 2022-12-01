@@ -217,7 +217,6 @@ if [ -d $HOME/.local/share/solana/install/active_release/bin ]; then
   export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
 fi
 
-# Python VirtualEnvWrapper
 # Add the bin folder to $PATH before the plugins load
 PATH=$HOME/.local/bin:$PATH
 
@@ -269,3 +268,14 @@ if [ -d $HOME/.zplug ]; then
   base16_material-darker
 fi
 
+###############################################################
+# Python virtual env
+
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+  export WORKON_HOME=$HOME/.virtualenvs
+  export PROJECT_HOME=$HOME/dev/py_projects
+  mkdir -p $WORKON_HOME
+  mkdir -p $PROJECT_HOME
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
