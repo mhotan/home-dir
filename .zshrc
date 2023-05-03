@@ -93,12 +93,26 @@ case `uname` in
       . ~/.profile
       ln -sfn ~/.tfenv/bin/* ~/.local/bin
     fi
+
+    # Initialize packages installed with Homebrew
+    export HOMEBREW_PACKAGES="$HOME/linuxbrew/.linuxbrew"
+    
+    export ZPLUG_HOME="$HOMEBREW_PACKAGES/opt/zplug"
+    if [ -d $ZPLUG_HOME ]; then
+      source $ZPLUG_HOME/init.zsh
+
+      ## Install Zplugins
+      zplug chriskempson/base16-shell, from:github
+      zplug romkatv/powerlevel10k, as:theme, depth:1
+
+      ## Post Load actions
+      base16_material-darker
+    fi
   ;;
   FreeBSD)
     # commands for FreeBSD go here
   ;;
 esac
-
 
 ### Helper functions
 
@@ -122,160 +136,3 @@ export GIT_EDITOR="$EDITOR"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
-
-# Delete branches that matches prefix.
-gbdme () {
-  pattern=${1:-"michael/*"}
-  git branch | grep "${pattern}" | xargs git branch -D
-}
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Custom git push alias 
-
-alias dev='cd ~/dev/'
-alias vi='vim'
-alias be='bundle exec'
-alias d='docker'
-alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
-alias dmip='docker-machine ip $(docker-machine active)'
-alias dc='docker compose'
-alias ggpull='git pull origin $(git_current_branch)'
-alias tidyxml='tidy -xml -i'
-alias gpme='git push michael $(git_current_branch)'
-alias gbDme='git branch -D $(printf "%s\n" $(git branch) | grep 'michael/')'
-alias gcloud-configure-docker='gcloud auth configure-docker'
-alias pr='gh pr create --fill'
-
-# TODO Figure out to escape following command to clean up old local branches
-# git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
-
-HELPDIR=/usr/local/share/zsh/help
-
-# The next is to override imagemagick with imagemagick6
-# required for some versions of rmagick
-# export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-
-# Setup Python virtual environments
-if [ ! -d ~/dev/python/envs ]; then
-  mkdir -p ~/dev/python/envs
-  export WORKON_HOME=~/dev/python/envs
-fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-# Let SDKMAN configure JAVA_HOME
-export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
-
-[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
-
-# Add Google Cloud completions if Google Cloud SDK installed through Snap
-GOOGLE_CLOUD_ZSH_COMPLETIONS="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-[[ -f $GOOGLE_CLOUD_ZSH_COMPLETIONS ]] && source $GOOGLE_CLOUD_ZSH_COMPLETIONS
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Init oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
-if [ -d $HOME/Android/Sdk ]; then\
-  # Windows WSL2
-  export ANDROID_HOME=$HOME/Android/Sdk
-  export PATH=$PATH:$ANDROID_HOME/emulator
-  export PATH=$PATH:$ANDROID_HOME/tools
-  export PATH=$PATH:$ANDROID_HOME/tools/bin
-  export PATH=$PATH:$ANDROID_HOME/platform-tools
-elif [ -d $HOME/Library/Android/sdk ]; then
-  # MacOS
-  export ANDROID_HOME=$HOME/Library/Android/sdk
-  export PATH=$PATH:$ANDROID_HOME/emulator
-  export PATH=$PATH:$ANDROID_HOME/tools
-  export PATH=$PATH:$ANDROID_HOME/tools/bin
-  export PATH=$PATH:$ANDROID_HOME/platform-tools
-fi
-
-if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-
-# Add Solana to local path if it exists
-if [ -d $HOME/.local/share/solana/install/active_release/bin ]; then
-  export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
-fi
-
-# Add the bin folder to $PATH before the plugins load
-PATH=$HOME/.local/bin:$PATH
-
-###############################################################
-## OpenSSL@3 
-# Prefer OpenSSL 3 if it has been installed. I.E. `brew install openssl`
-
-if [ -d '/usr/local/opt/openssl@3/bin' ]; then
-  export PATH="/usr/local/opt/openssl@3/bin:$PATH"
-fi
-
-###############################################################
-## Go setup
-
-# Add go binaries to path
-if [[ $(command -v go) ]]; then
-  export PATH=$PATH:$(go env GOPATH)/bin
-fi
-
-###############################################################
-## Postgres libpq
-
-LIBPQ_BIN_DIR="/usr/local/opt/libpq/bin"
-if [ -d $LIBPQ_BIN_DIR ]; then
-  export PATH="$LIBPQ_BIN_DIR:$PATH"
-fi
-
-###############################################################
-## Local non-revision controlled profile
-
-if [ -f ~/.local.zsh ]; then
-  source ~/.local.zsh
-fi
-
-###############################################################
-## zplug
-
-if [ -d $HOME/.zplug ]; then
-  source ~/.zplug/init.zsh # Initialize ZPlug
-
-  ## Install Zplugins
-  zplug chriskempson/base16-shell, from:github
-  zplug romkatv/powerlevel10k, as:theme, depth:1
-
-  ## Load Zplug
-  zplug load
-
-  ## Post Load actions
-  base16_material-darker
-fi
-
-###############################################################
-# Python virtual env
-
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-  export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-  export WORKON_HOME=$HOME/.virtualenvs
-  export PROJECT_HOME=$HOME/dev/py_projects
-  mkdir -p $WORKON_HOME
-  mkdir -p $PROJECT_HOME
-  source /usr/local/bin/virtualenvwrapper.sh
-fi
