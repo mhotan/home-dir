@@ -217,13 +217,6 @@ if [ -d $HOME/.local/share/solana/install/active_release/bin ]; then
   export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
 fi
 
-if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
-  export WORKON_HOME=$HOME/.virtualenvs
-  export PROJECT_HOME=$HOME/dev/python/envs
-  source $HOME/.local/bin/virtualenvwrapper.sh
-fi
-
-# Python VirtualEnvWrapper
 # Add the bin folder to $PATH before the plugins load
 PATH=$HOME/.local/bin:$PATH
 
