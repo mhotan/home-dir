@@ -5,33 +5,41 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
-# 
+export ZSH="$HOME/.oh-my-zsh"
 
-export ZSH=~/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="wezm"
-
-# Requires brew tap homebrew/cask-fonts && brew cask install font-hack-nerd-font
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-POWERLEVEL9K_MODE="nerdfont-complete"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -43,6 +51,9 @@ export UPDATE_ZSH_DAYS=13
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -52,87 +63,158 @@ export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# OS specific ZSH
-case `uname` in
-  Darwin)
-    # commands for OS X go here
-    # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-    # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-    # Example format: plugins=(rails git textmate ruby lighthouse)
-    # Add wisely, as too many plugins slow down shell startup.
-    plugins=(brew terraform common-aliases docker git kubectl)
-    export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
 
-    # NVM / Node environment manager
-    if [[ $(brew list nvm) ]]; then
-      export NVM_DIR="$HOME/.nvm"
-      . "$(brew --prefix nvm)/nvm.sh"
-    fi
-    
-  ;;
-  Linux)
-    # commands for Linux go here
-    plugins=(terraform common-aliases docker docker-compose git kubectl node npm nvm virtualenvwrapper)
+plugins=(ag aliases alias-finder aws cp docker docker-compose dotenv gh git git-auto-fetch git-flow git-lfs golang httpie node npm pip ssh-agent sudo terraform virtualenvwrapper yarn)
+source $ZSH/oh-my-zsh.sh
 
-    # NVM
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+################################################################################################
+### Environment Variables
 
-    # Configure tfenv (if properly installed)
-    # Reference setup_elementary_6_linux.sh
-    . ~/.profile
-    if [ -d "$HOME/.tfenv/bin" ]; then 
-      mkdir -p ~/.local/bin/
-      . ~/.profile
-      ln -sfn ~/.tfenv/bin/* ~/.local/bin
-    fi
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export GIT_EDITOR="$EDITOR"
+export SSH_KEY_PATH="~/.ssh/id_rsa" # ssh
 
-    # Initialize packages installed with Homebrew
-    export HOMEBREW_PACKAGES="$HOME/linuxbrew/.linuxbrew"
-    
-    export ZPLUG_HOME="$HOMEBREW_PACKAGES/opt/zplug"
-    if [ -d $ZPLUG_HOME ]; then
-      source $ZPLUG_HOME/init.zsh
-
-      ## Install Zplugins
-      zplug chriskempson/base16-shell, from:github
-      zplug romkatv/powerlevel10k, as:theme, depth:1
-
-      ## Post Load actions
-      base16_material-darker
-    fi
-  ;;
-  FreeBSD)
-    # commands for FreeBSD go here
-  ;;
-esac
-
-### Helper functions
+################################################################################################
+### Aliases and Functions
 
 # Determine a command/program exists.
 exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias dev='cd ~/dev/'
+alias vi='vim'
+alias be='bundle exec'
+alias d='docker'
+alias dclean='docker rm $(docker ps -q -f status=exited) && docker rmi $(docker images -q -f dangling=true)'
+alias dmip='docker-machine ip $(docker-machine active)'
+alias dc='docker compose'
+alias ggpull='git pull origin $(git_current_branch)'
+alias tidyxml='tidy -xml -i'
+alias gpme='git push michael $(git_current_branch)'
+alias gbDme='git branch -D $(printf "%s\n" $(git branch) | grep 'michael/')'
+alias gcloud-configure-docker='gcloud auth configure-docker'
+alias pr='gh pr create --fill'
+
+################################################################################################
+### Source files
+
 if [ -s ~/.profile ]; then
   source ~/.profile
 fi
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-export VISUAL=vim
-export EDITOR="$VISUAL"
-export GIT_EDITOR="$EDITOR"
+if [ -f ~/.local.zsh ]; then
+  source ~/.local.zsh
+fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# Not specified to be last line but for convention leave p10k as last 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+################################################################################################
+### Configure Development Package Managers
+
+# Homebrew
+HOMEBREW_PREFIX=$(brew --prefix)
+if [ -x $HOMEBREW_PREFIX/bin/brew ]; then
+  # Set HOMEBREW environment variables
+  eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+fi
+
+# Node (NVM, etc)
+NVM_DIR=$(brew --prefix nvm)
+if [ -d $NVM_DIR ]; then
+  source ${NVM_DIR}/nvm.sh
+  source ${NVM_DIR}/etc/bash_completion.d/nvm
+fi
+
+# Python
+if [ ! -d ~/dev/python/envs ]; then
+  mkdir -p ~/dev/python/envs
+  export WORKON_HOME=~/dev/python/envs
+fi
+
+# JVM Based Stuff
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
+
+# Go
+# Add Go binaries to path
+if [[ $(command -v go) ]]; then
+  export PATH=$PATH:$(go env GOPATH)/bin
+fi
+
+################################################################################################
+### Tools
+
+# Android
+if [ -d $HOME/Android/Sdk ]; then\
+  # Windows WSL2
+  export ANDROID_HOME=$HOME/Android/Sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+elif [ -d $HOME/Library/Android/sdk ]; then
+  # MacOS
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
+
+## OpenSSL@3 
+# Prefer OpenSSL 3 if it has been installed. I.E. `brew install openssl`
+if [ -d '/usr/local/opt/openssl@3/bin' ]; then
+  export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+fi
+
+## Postgres libpq
+LIBPQ_DIR=$(brew --prefix libpq)
+if [ -d "${LIBPQ_DIR}/bin" ]; then
+  export PATH="$PATH:$LIBPQ_DIR/bin"
+fi
+
+## zplug
+ZPLUG_DIR=$(brew --prefix zplug)
+if [ -d $HOME/.zplug ]; then
+  source ~/.zplug/init.zsh # Initialize ZPlug
+
+  ## Install Zplugins
+  zplug chriskempson/base16-shell, from:github
+
+  ## Load Zplug
+  zplug load
+
+  ## Post Load actions
+  base16_material-darker
+fi
