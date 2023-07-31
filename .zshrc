@@ -66,7 +66,7 @@ case `uname` in
     # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
     # Example format: plugins=(rails git textmate ruby lighthouse)
     # Add wisely, as too many plugins slow down shell startup.
-    plugins=(brew terraform common-aliases docker git kubectl)
+    plugins=(brew terraform common-aliases docker git kubectl aws)
     export PATH="/Users/${USER}/.gvm/vertx/current/bin:/Users/${USER}/.gvm/springboot/current/bin:/Users/${USER}/.gvm/lazybones/current/bin:/Users/${USER}/.gvm/jbake/current/bin:/Users/${USER}/.gvm/groovyserv/current/bin:/Users/${USER}/.gvm/groovy/current/bin:/Users/${USER}/.gvm/griffon/current/bin:/Users/${USER}/.gvm/grails/current/bin:/Users/${USER}/.gvm/gradle/current/bin:/Users/${USER}/.gvm/glide/current/bin:/Users/${USER}/.gvm/gaiden/current/bin:/Users/${USER}/.gvm/crash/current/bin:/Users/${USER}/.gvm/asciidoctorj/current/bin:/Users/${USER}/.config/base16-shell:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
     # NVM / Node environment manager
@@ -153,6 +153,7 @@ alias gpme='git push michael $(git_current_branch)'
 alias gbDme='git branch -D $(printf "%s\n" $(git branch) | grep 'michael/')'
 alias gcloud-configure-docker='gcloud auth configure-docker'
 alias pr='gh pr create --fill'
+alias prcloud='gh pr create -T pull_request_template.md'
 
 # TODO Figure out to escape following command to clean up old local branches
 # git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
@@ -279,3 +280,12 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   mkdir -p $PROJECT_HOME
   source /usr/local/bin/virtualenvwrapper.sh
 fi
+
+###############################################################
+# Company specific configuration
+
+export CLOUD_REPO=${HOME}/dev/union.ai/cloud
+export AWS_CONFIG_FILE=${CLOUD_REPO}/gen/cli-config/aws
+export KUBECONFIG=${HOME}/.kube/config:${CLOUD_REPO}/gen/cli-config/kubeconfig
+
+

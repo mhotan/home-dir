@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /Users/michaelhotan/home-dir/.gitignore_global
+	excludesfile = /Users/michael/.gitignore_global
 	editor = vim
 [difftool "sourcetree"]
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
@@ -8,8 +8,8 @@
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 	trustExitCode = true
 [user]
-	name = Michael Hotan
-	email = michael@formational.shop
+	name = Mike Hotan
+	email = mike@union.ai
 [gui]
 [diff]
 	tool = Kaleidoscope
@@ -29,7 +29,3 @@
 	process = git-lfs filter-process
 [interactive]
   singlekey = true
-[url "ssh://git@gitlab.com/"]
-	insteadOf = https://gitlab.com/
-[commit]
-	template = /Users/michaelhotan/.stCommitMsg
