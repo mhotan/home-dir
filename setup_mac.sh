@@ -1,18 +1,6 @@
 # Obtain a reference to the directory containing `setup.sh`
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Install SDKman for Java, Scala, SBT,
-# We will use SDK to 
-if ! type sdk > /dev/null; then
-  curl -s "https://get.sdkman.io" | bash
-fi
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java
-sdk install kotlin
-sdk install gradle
-sdk install scala
-sdk install sbt
-
 # Reference: http://brew.sh/
 echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -26,17 +14,39 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 
 # Python virtualenvwrapper setup
 echo "Installing tools for managing Python environments"
-pip install virtualenvwrapper
+pip3 install virtualenvwrapper
 
+# Necessary for helper packages. 
 echo "Creating ~/.config directories"
 # Implictly creates .config
 mkdir -p ~/.config/nvim/backup ~/.config/nvim/swap ~/.config/nvim/undo
 
-# Install base16-shell
+# Using zplug. Check .zshrc
+# Install base16-shell for shell nice colors.
+# if [ ! -d ~/.config/base16-shell ]; then
+#   echo "Downloading base16-shell"
+#   git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+# fi
+
+# Install base16-idea for Intellij nice colors
 if [ ! -d ~/.config/base16-idea ]; then
   echo "Downloading base16-idea"
   git clone https://github.com/adilosa/base16-idea.git ~/.config/base16-idea
 fi
+
+#############################################################################################
+## vimrc 
+# https://github.com/amix/vimrc
+
+if [ ! -d "$HOME/.vim_runtime" ]; then
+  echo "Installing vim runtime"
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+  sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh
+fi
+
+##### Dependencies required for current VIM setup for .vimrc
+# Required to support vim-github-dashboard
+gem install json_pure
 
 #############################################################################################
 ###### Installing Node.js through nvm (nvm installed through brew)
@@ -52,19 +62,6 @@ nvm use --lts
 npm install -g npx
 npm install -g expo-cli
 
-#############################################################################################
-## vimrc 
-# https://github.com/amix/vimrc
-
-if [ ! -d "$HOME/.vim_runtime" ]; then
-  echo "Installing vim runtime"
-  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-  sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh
-fi
-
-##### Dependencies required for current VIM setup for .vimrc
-# Required to support vim-github-dashboard
-gem install json_pure
 
 #############################################################################################
 ##### Setting ZSH as the default shell
@@ -87,9 +84,10 @@ sudo chsh -s /usr/local/bin/zsh
 echo "Symlinking zshrc"
 ln -sfn "${BASE_DIR}/.zshrc" ~/.zshrc
 
-echo "Symlinking vimrc for neovim, vimrc, and ideavimrc"
-ln -sfn "${BASE_DIR}/.vimrc" ~/.vimrc
-ln -sfn "${BASE_DIR}/.vimrc" ~/.ideavimrc
+# Using awesome vim defined above.
+# echo "Symlinking vimrc for neovim, vimrc, and ideavimrc"
+# ln -sfn "${BASE_DIR}/.vimrc" ~/.vimrc
+# ln -sfn "${BASE_DIR}/.vimrc" ~/.ideavimrc
 
 echo "Symlinking tmux config"
 ln -sfn "${BASE_DIR}/.tmux.conf" ~/.tmux.conf

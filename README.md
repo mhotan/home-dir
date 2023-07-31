@@ -5,13 +5,20 @@ Version controlled set of files used to set up my home directory.  This project 
 ## Usage
 
 ```sh
-$ cd ~/
-$ git clone https://github.com/mhotan/home-dir.git
-$ # MacOs
-$ home-dir/setup_mac.sh
-$ 
-$ # Elementary OS 6
-$ sudo ./setup_elementary_6_linux.sh
+# Install package manager dependencies.
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install git
+
+# Run setup scrript.
+cd ~/
+git clone https://github.com/mhotan/home-dir.git
+# MacOs
+home-dir/setup_mac.sh
+```
+
+```sh
+# Elementary OS 6
+sudo ./setup_elementary_6_linux.sh
 ```
 
 ### Update brew packages
