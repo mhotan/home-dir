@@ -108,3 +108,14 @@ ln -sfn "${BASE_DIR}/.p10k.zsh" ~/.p10k.zsh
 # Install VSCode settings
 code --install-extension Shan.code-settings-sync
 
+#############################################################################################
+##### pyenv-virtualenv setup
+
+if command -v "pyenv" >/dev/null 2>&1; then
+  echo "pyenv is already installed"
+else
+  echo "Installing pyenv"
+  if [ ! -d "$HOME/.pyenv/plugins/pyenv-virtualenv" ]; then
+    git clone "https://github.com/pyenv/pyenv-virtualenv.git" "$HOME/.pyenv/plugins/pyenv-virtualenv"
+  fi
+fi

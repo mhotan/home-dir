@@ -289,3 +289,17 @@ export AWS_CONFIG_FILE=${CLOUD_REPO}/gen/cli-config/aws
 export KUBECONFIG=${HOME}/.kube/config:${CLOUD_REPO}/gen/cli-config/kubeconfig
 
 
+###############################################################
+# fzf fuzzy searcher
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+###############################################################
+# pyenv
+if command -v "pyenv" >/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+
+  # auto active virtual envs
+  eval "$(pyenv virtualenv-init -)"
+fi
