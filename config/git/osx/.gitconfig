@@ -29,3 +29,5 @@
 	process = git-lfs filter-process
 [interactive]
   singlekey = true
+[commit]
+	template = /Users/michael/.stCommitMsg

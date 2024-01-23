@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Path to your oh-my-zsh installation.
-# 
+#
 
 export ZSH=~/.oh-my-zsh
 
@@ -74,7 +74,7 @@ case `uname` in
       export NVM_DIR="$HOME/.nvm"
       . "$(brew --prefix nvm)/nvm.sh"
     fi
-    
+
   ;;
   Linux)
     # commands for Linux go here
@@ -88,7 +88,7 @@ case `uname` in
     # Configure tfenv (if properly installed)
     # Reference setup_elementary_6_linux.sh
     . ~/.profile
-    if [ -d "$HOME/.tfenv/bin" ]; then 
+    if [ -d "$HOME/.tfenv/bin" ]; then
       mkdir -p ~/.local/bin/
       . ~/.profile
       ln -sfn ~/.tfenv/bin/* ~/.local/bin
@@ -138,7 +138,7 @@ gbdme () {
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Custom git push alias 
+# Custom git push alias
 
 alias dev='cd ~/dev/'
 alias vi='vim'
@@ -222,7 +222,7 @@ fi
 PATH=$HOME/.local/bin:$PATH
 
 ###############################################################
-## OpenSSL@3 
+## OpenSSL@3
 # Prefer OpenSSL 3 if it has been installed. I.E. `brew install openssl`
 
 if [ -d '/usr/local/opt/openssl@3/bin' ]; then
@@ -234,7 +234,9 @@ fi
 
 # Add go binaries to path
 if [[ $(command -v go) ]]; then
-  export PATH=$PATH:$(go env GOPATH)/bin
+  export GOPATH=$HOME/go
+  export GOROOT="$(brew --prefix golang)/libexec"
+  export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 fi
 
 ###############################################################
@@ -286,7 +288,7 @@ fi
 
 export CLOUD_REPO=${HOME}/dev/union.ai/cloud
 export AWS_CONFIG_FILE=${CLOUD_REPO}/gen/cli-config/aws
-export KUBECONFIG=${HOME}/.kube/config:${CLOUD_REPO}/gen/cli-config/kubeconfig
+export KUBECONFIG=${HOME}/.kube/config:${CLOUD_REPO}/gen/cli-config/kubeconfig:${HOME}/.kube/kind-config
 
 
 ###############################################################
@@ -294,12 +296,27 @@ export KUBECONFIG=${HOME}/.kube/config:${CLOUD_REPO}/gen/cli-config/kubeconfig
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ###############################################################
-# pyenv
+# pyenv & pyenv-virtualenv
+
 if command -v "pyenv" >/dev/null 2>&1; then
   export PYENV_ROOT="$HOME/.pyenv"
   command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 
   # auto active virtual envs
-  eval "$(pyenv virtualenv-init -)"
+  if which pyenv-virtualenv-init > /dev/null; then
+    eval "$(pyenv virtualenv-init -)";
+  fi
+fi
+
+
+###############################################################
+# aws
+export AWS_PAGER=""
+
+###############################################################
+# krew
+
+if [ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
