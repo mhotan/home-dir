@@ -31,3 +31,5 @@
   singlekey = true
 [commit]
 	template = /Users/michael/.stCommitMsg
+[submodule]
+	recurse = true

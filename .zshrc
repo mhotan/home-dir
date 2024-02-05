@@ -123,12 +123,6 @@ export GIT_EDITOR="$EDITOR"
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
-# Delete branches that matches prefix.
-gbdme () {
-  pattern=${1:-"michael/*"}
-  git branch | grep "${pattern}" | xargs git branch -D
-}
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -137,8 +131,6 @@ gbdme () {
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Custom git push alias
 
 alias dev='cd ~/dev/'
 alias vi='vim'
@@ -150,13 +142,15 @@ alias dc='docker compose'
 alias ggpull='git pull origin $(git_current_branch)'
 alias tidyxml='tidy -xml -i'
 alias gpme='git push michael $(git_current_branch)'
-alias gbDme='git branch -D $(printf "%s\n" $(git branch) | grep 'michael/')'
 alias gcloud-configure-docker='gcloud auth configure-docker'
 alias pr='gh pr create --fill'
 alias prcloud='gh pr create -T pull_request_template.md'
 
-# TODO Figure out to escape following command to clean up old local branches
-# git fetch -p && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done
+# Delete branches that matches prefix.
+gbDme () {
+  pattern=${1:-"mike/|hotan/"}
+  printf "%s\n" $(git branch) | grep -E "${pattern}" | xargs git branch -D
+}
 
 HELPDIR=/usr/local/share/zsh/help
 
